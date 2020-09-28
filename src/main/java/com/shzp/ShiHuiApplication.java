@@ -9,9 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @MapperScan("com.shzp.dao")
 @EnableAsync
 public class ShiHuiApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(ShiHuiApplication.class, args);
 	}
-
 }
