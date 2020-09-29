@@ -1,4 +1,4 @@
-package com.shzp.user.freemarker;
+package com.shzp.sys.freemarker;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
