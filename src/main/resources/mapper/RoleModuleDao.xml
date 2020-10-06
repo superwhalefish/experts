@@ -4,7 +4,7 @@
 <select id="findModuleCodeByRoleCode" parameterType="list" resultType="String">
 SELECT module_code FROM `sys_role_module`  
 <where>
-role_codein
+role_code  in
 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
 #{item}
 </foreach>
