@@ -46,7 +46,6 @@ public class UserRealm extends AuthorizingRealm {
 		List<String> roleCodes = accountRoleDao.findRoleByAcc_code(acc.getAcc_code());
 		List<String> moduleCodes = roleModuleDao.findModuleCodeByRoleCode(roleCodes);
 		// 添加资源的授权 字符串需和shiro配置认证授权perms[]内的内容保持一直
-		// info.addStringPermission("user:exam");
 		info.addStringPermissions(moduleCodes);
 		return info;
 	}
@@ -64,9 +63,6 @@ public class UserRealm extends AuthorizingRealm {
 
 		Account user = accountDao.findByAcc_name(token.getUsername());
 		if (user == null) {
-			if (!token.getUsername().equals(user.getAcc_name())) {
-				return null;
-			}
 			return null;// shiro底层将抛出UnKnownAccountException异常
 		}
 		// 判断密码

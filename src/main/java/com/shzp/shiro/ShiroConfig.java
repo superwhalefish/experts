@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import com.shzp.sys.dao.ModuleDao;
 import com.shzp.sys.entity.Module;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
 @Configuration
 public class ShiroConfig {
@@ -37,20 +38,21 @@ public class ShiroConfig {
 		 */
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
 		// 放行页面
-		//filterMap.put("/student/index", "anon");
+		// filterMap.put("/student/index", "anon");
 		// 授权过滤器
 		List<Module> module = moduleDao.findModuleAll();
-		for(int i=0;i<module.size();i++) {
-			filterMap.put(module.get(i).getModule_url(), "perms["+module.get(i).getModule_code()+"]");
+		for (int i = 0; i < module.size(); i++) {
+			filterMap.put(module.get(i).getModule_url(), "perms[" + module.get(i).getModule_code() + "]");
 		}
 		// 拦截页面
 		filterMap.put("/system/*", "authc");
+		//logout是shiro提供的过滤器,这是走自定义的 shiroLogoutFilter 上面有配置
+		filterMap.put("/index", "logout");
 		// 无用户登录跳转页面
-		shiroFilterFactoryBean.setLoginUrl("/toLogin");
+		shiroFilterFactoryBean.setLoginUrl("/index");
 		// 无权限访问页面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
-
 		return shiroFilterFactoryBean;
 	}
 
@@ -71,5 +73,19 @@ public class ShiroConfig {
 	@Bean(name = "userRealm")
 	public UserRealm getRealm() {
 		return new UserRealm();
+	}
+
+	/**
+	 * 配置shiroDialect,用于thymeleaf和shiro标签配合使用
+	 */
+	@Bean
+	public ShiroDialect getShiroDialect() {
+		return new ShiroDialect();
+	}
+	public ShiroLogoutFilter shiroLogoutFilter() {
+		ShiroLogoutFilter shiroLogoutFilter = new ShiroLogoutFilter();
+		 shiroLogoutFilter.setRedirectUrl("/index");
+		return shiroLogoutFilter;
+		
 	}
 }

@@ -3,20 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <title>河南食惠供应链管理有限公司</title>
-		<link rel="shortcut icon" href="img/25.ico">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="baidu-site-verification" content="6KK4rSqo4k" />
-		<link type="text/css" rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="css/index.css" />
-		<script type="text/javascript" src="js/jquery-easyui-1.9.7/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+<link rel="shortcut icon" href="img/25.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="baidu-site-verification" content="6KK4rSqo4k" />
+<link type="text/css" rel="stylesheet"
+	href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="js/jquery-easyui-1.9.7/themes/default/easyui.css">
+<script type="text/javascript"
+	src="js/jquery-easyui-1.9.7/jquery.min.js"></script>
+<script type="text/javascript"
+	src="js/jquery-easyui-1.9.7/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/top/index.js"></script>
 </head>
 <body>
-欢迎来到首页
+	<div class="container" style="background-color: #eee">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="jumbotron">
+					<h1>欢迎使用</h1>
+					<p>这是一个全方位的服务系统，界面简洁，操作简单，功能齐全</p>
+				</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-6 column">
+				<div class="jumbotron">
+					<div class="carousel-inner">
+						<div class="item active">
+							<img alt="" src="img/index/welcome.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 column">
+				<form class="form-horizontal" style="margin-top: 30%" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 col-xs-3 control-label">账号</label>
+						<div class="col-sm-6 col-xs-6">
+							<input type="text" id="usr" class="form-control"
+								placeholder="请输入账号">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 col-xs-3 control-label">密码</label>
+						<div class="col-sm-6 col-xs-6">
+							<input type="password" id="psw" class="form-control"
+								placeholder="请输入密码">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-8">
+							<button type="button" class="btn btn-primary" onclick="login()">登录</button>
+						</div>
+					</div>
+				</form>
 
-<a href="system/test1">test1</a>
-<a href="system/test2">test2</a>
-<a href="system/test3">test3</a>
-<a href="system/test4">test4</a>
+			</div>
+		</div>
+	</div>
+	<div style="text-align: center;">
+		Copyright © 2020 <a href="https://www.shihui.online" target="_blank">shihui.online</a>
+	</div>
+<script type="text/javascript">
+$("#psw").keypress(function(event) {
+	if (event.which === 13) {
+		login();
+	}
+})
+</script>
 </body>
+
 </html>

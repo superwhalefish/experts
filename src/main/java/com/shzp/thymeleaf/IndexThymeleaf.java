@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexThymeleaf {
 
-	@RequestMapping("/toLogin")
+	@RequestMapping("/menu")
 	public String login() {
 		
-		return "login";
+		return "menu";
 	}
 	
 	@RequestMapping("/index")
