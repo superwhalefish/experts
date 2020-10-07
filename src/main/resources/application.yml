@@ -13,11 +13,16 @@ spring:
         500MB
       max-request-size:
         500MB
-  freemarker:
-    cache: true
-    charset: UTF-8
-    suffix: .html
-    content-type: text/html
+#   freemarker模板引擎配置        
+#  freemarker:
+#    cache: true
+#    charset: UTF-8
+#    suffix: .html
+#    content-type: text/html
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
 server:
   port: 8989
   servlet:
@@ -26,6 +31,6 @@ logging:
   level:
     com.yy.spring.dao: debug
 mybatis:
-  type-aliases-package: com.shzp.entity
+  type-aliases-package: com.shzp.*.entity
   mapper-locations:
   - classpath:mapper/*.xml
