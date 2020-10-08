@@ -20,7 +20,7 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 public class ShiroConfig {
 	@Autowired
 	private ModuleDao moduleDao;
-
+	
 	/**
 	 * 创建ShiroFilterFactoryBean 用户主题
 	 */
@@ -41,6 +41,7 @@ public class ShiroConfig {
 		// filterMap.put("/student/index", "anon");
 		// 授权过滤器
 		List<Module> module = moduleDao.findModuleAll();
+		System.out.println("+++++++++++++++++++++++++"+module);
 		for (int i = 0; i < module.size(); i++) {
 			filterMap.put(module.get(i).getModule_url(), "perms[" + module.get(i).getModule_code() + "]");
 		}

@@ -1,6 +1,8 @@
 package com.shzp.shiro;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,11 +16,15 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.shzp.sys.dao.AccountDao;
 import com.shzp.sys.dao.AccountRoleDao;
+import com.shzp.sys.dao.ModuleDao;
 import com.shzp.sys.dao.RoleModuleDao;
 import com.shzp.sys.entity.Account;
+import com.shzp.sys.entity.Module;
 
 public class UserRealm extends AuthorizingRealm {
 	// 业务注入
@@ -28,7 +34,8 @@ public class UserRealm extends AuthorizingRealm {
 	private AccountRoleDao accountRoleDao;
 	@Autowired
 	private RoleModuleDao roleModuleDao;
-
+	@Autowired
+	private ModuleDao moduleDao;
 	/**
 	 * 执行授权逻辑 授权认证
 	 */
@@ -49,7 +56,24 @@ public class UserRealm extends AuthorizingRealm {
 		info.addStringPermissions(moduleCodes);
 		return info;
 	}
-
+	
+//	public Map<String, Object> searchMode() {
+//		Subject subject = SecurityUtils.getSubject();
+//		Account acc = (Account) subject.getPrincipal();
+//		List<String> roleCodes = accountRoleDao.findRoleByAcc_code(acc.getAcc_code());
+//		List<String> moduleCodes = roleModuleDao.findModuleCodeByRoleCode(roleCodes);
+//		List<Module> serachModule = moduleDao.serachModule(moduleCodes);
+//		Map<String, Object> mmp=new HashMap<String, Object>();
+//		for(int i=0;i<serachModule.size();i++) {
+//			mmp.put("name", serachModule.get(i).getModule());
+//			mmp.put("url",serachModule.get(i).getModule_url());
+//			mmp.put("id",serachModule.get(i).getId());
+//			mmp.put("pid","");
+//		}
+//		return mmp;
+//	}
+	
+	
 	/**
 	 * 执行认证逻辑 登陆认证
 	 */
@@ -60,7 +84,7 @@ public class UserRealm extends AuthorizingRealm {
 		// 编写shiro认证逻辑，判断用户名和密码
 		// 判断用户名
 		UsernamePasswordToken token = (UsernamePasswordToken) arg0;
-
+		
 		Account user = accountDao.findByAcc_name(token.getUsername());
 		if (user == null) {
 			return null;// shiro底层将抛出UnKnownAccountException异常
