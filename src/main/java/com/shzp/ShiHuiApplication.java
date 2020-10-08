@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@MapperScan("com.shzp.*")
 @MapperScan("com.shzp.*.dao")
 @EnableAsync
 @EnableTransactionManagement
