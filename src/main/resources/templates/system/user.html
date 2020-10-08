@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>账号信息管理</title>
+<link rel="stylesheet" href="../js/layui/css/layui.css">
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript"
+	src="../js/jquery-easyui-1.9.7/jquery.min.js"></script>
+</head>
+<style>
+.layui-table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+</style>
+<body>
+	<table id="usertab" lay-filter="test"></table>
+	<script type="text/html" id="acc_state">
+		<input type="checkbox" name="open" value="{{d.publishstate}}" lay-skin="switch" lay-text="正在使用|已停用 " lay-filter="switchptstatus" {{ d.acc_state=='1' ? 'checked' : '' }} data-id="{{d.id}}">
+	</script>
+
+	<script type="text/html" id="usertoolbar">
+<form class="layui-form" id="searchinit"  lay-filter="selFilter">
+		账号：
+		<div class="layui-input-inline">
+			<input type="text" id="searchacc_name" value="" lay-verify="required|number" autocomplete="off" class="layui-input">
+		</div>
+		使用者：
+		<div class="layui-input-inline">
+			<input type="text" id="searchuser_code" value="" lay-verify="required|number" autocomplete="off" class="layui-input">
+		</div>
+		停用状态：
+		<div class="layui-input-inline">
+						<select id="searchacc_state" name="addmonth" lay-verify="required">
+							<option value="">--请选择--</option>
+							<option value="1">--已停用--</option>
+							<option value="2">--未停用--</option>
+						</select>
+		</div>
+		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索</a>
+		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='addaccount()'>添加</a>
+</form>
+</script>
+</body>
+<script type="text/javascript">
+	$(function() {
+		init();
+	});
+
+	function init() {
+		layui
+				.use(
+						[ 'table', 'form', 'laydate' ],
+						function() {
+							var table = layui.table;
+							var form = layui.form;
+							var laydate = layui.laydate;
+							table
+									.render({
+										elem : '#usertab' //指定原始表格元素选择器（推荐id选择器）
+										,
+										toolbar : "#usertoolbar",
+										where : {
+											acc_name : $.trim($(
+													"#searchacc_name").val()),
+											user_code : $.trim($(
+													"#searchuser_code").val()),
+											acc_state : $.trim($(
+													"#searchacc_state").val())
+										},
+										id : "protab",
+										method : "post",
+										loading : true,
+										page : true,
+										url : "/SH/auth/getAccount",
+										height : 500 //容器高度
+										,
+										cols : [ [
+												{
+													field : "acc_code",
+													title : "账号编码",
+												},
+												{
+													field : 'acc_name',
+													title : '账号',
+												},
+												{
+													field : 'user_name',
+													title : '使用者',
+													templet : "<div>{{d.user.user_name}}</div>"
+												},
+												{
+													field : 'lasttime',
+													title : '最后一次登录时间',
+												},
+												{
+													field : 'acc_state',
+													title : '是否停用',
+													templet : "#acc_state"
+												},
+												{
+													field : 'acc_start',
+													title : '注册时间',
+												},
+												{
+													field : 'acc_end',
+													title : '停用时间',
+												},
+												{
+													fixed : "right",
+													title : "操作",
+													templet : function(d) {
+														return "<div><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='edit("
+																+ d.id
+																+ ")' >编辑</a><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='del("
+																+ d.id
+																+ ")' >删除</a> </div>"
+													}
+												} ] ],
+										limit : 10,
+										limits : [ 10, 20, 50 ]
+									});
+							form.on("switch(switchptstatus)", function(data) {
+								var selectIfKey = data.othis;
+								var parentTr = selectIfKey.parents("tr");
+								var acc_code = $(parentTr).find("td:eq(0)")
+										.find(".layui-table-cell").text();
+								if (data.elem.checked == true) {
+									//状态设置为1    开始使用
+
+								} else {
+
+								}
+							});
+						})
+	}
+</script>
+
+</html>

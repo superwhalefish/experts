@@ -6,4 +6,8 @@
 		resultType="User">
 		SELECT * FROM `usr_user` where user_code =#{user_code}
 	</select>
+	<!-- 根据用户名称查询用户信息 -->
+	<select id="findUserByUser_name" parameterType="String" resultType="User">
+	SELECT * FROM `usr_user` where user_name =#{user_name}
+	</select>
 </mapper>

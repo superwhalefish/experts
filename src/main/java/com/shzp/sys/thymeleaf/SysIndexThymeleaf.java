@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/system")
 public class SysIndexThymeleaf {
-	@RequestMapping(value = "/test1",method = RequestMethod.GET)
+	@RequestMapping(value = "/user",method = RequestMethod.GET)
 	public String test1(Model model) {
-		return "system/test1";
+		return "system/user";
 	}
 	@RequestMapping(value = "/test2",method = RequestMethod.GET)
 	public String test2(Model model) {

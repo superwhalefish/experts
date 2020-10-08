@@ -25,14 +25,14 @@
 	<select id="getAccount" parameterType="SysFenye" resultMap="accAndUserMap">
 		SELECT * FROM `sys_account`
 		<where> 
-		<if test="account.acc_name !=''and account.acc_name!=''">
-		and acc_name=#{acc_name}
+		<if test="account.acc_name !=null and account.acc_name!=''">
+		and acc_name=#{account.acc_name}
 		</if>
 		<if test="account.user_code !=null and account.user_code !=''">
-		and user_code =#{user_code}
+		and user_code =#{account.user_code}
 		</if>
 		<if test="account.acc_state !=null and account.acc_state !=''">
-		and acc_state =#{acc_state}
+		and acc_state =#{account.acc_state}
 		</if>
 		</where>
 		limit #{page},#{limit}
@@ -43,14 +43,14 @@
 	<select id="getAccountCount" parameterType="SysFenye" resultType="_int">
 		SELECT count(*) FROM `sys_account`
 		<where> 
-		<if test="account.acc_name !=''and account.acc_name!=''">
-		and acc_name=#{acc_name}
+		<if test="account.acc_name !=null and account.acc_name!=''">
+		and acc_name=#{account.acc_name}
 		</if>
 		<if test="account.user_code !=null and account.user_code !=''">
-		and user_code =#{user_code}
+		and user_code =#{account.user_code}
 		</if>
 		<if test="account.acc_state !=null and account.acc_state !=''">
-		and acc_state =#{acc_state}
+		and acc_state =#{account.acc_state}
 		</if>
 		</where>
 	</select>

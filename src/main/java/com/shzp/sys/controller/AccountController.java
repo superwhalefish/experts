@@ -2,13 +2,9 @@ package com.shzp.sys.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -83,11 +79,13 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getAccount", method = RequestMethod.POST)
+	@ResponseBody
 	public Map<String, Object> getAccount(Integer page, Integer limit, Account account) {
 		sysFenye.setAccount(account);
 		sysFenye.setPage((page - 1) * limit);
 		sysFenye.setLimit(limit);
-		return accountService.getAccount(sysFenye);
+		Map<String, Object> account2 = accountService.getAccount(sysFenye);
+		return account2;
 
 	}
 

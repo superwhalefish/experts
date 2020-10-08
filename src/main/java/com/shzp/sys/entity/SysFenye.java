@@ -1,12 +1,10 @@
 package com.shzp.sys.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 @Component
-public class SysFenye {
+public class SysFenye{
 	private Integer page;
 	private Integer limit;
-	@Autowired
 	private Account account;//账号
 	public Integer getPage() {
 		return page;
@@ -25,6 +23,10 @@ public class SysFenye {
 	}
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+	@Override
+	public String toString() {
+		return "SysFenye [page=" + page + ", limit=" + limit + ", account=" + account + "]";
 	}
 	
 	

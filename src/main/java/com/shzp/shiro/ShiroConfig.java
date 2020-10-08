@@ -40,6 +40,7 @@ public class ShiroConfig {
 		// 放行页面
 		// filterMap.put("/student/index", "anon");
 		// 授权过滤器
+		filterMap.put("/menu", "authc");
 		List<Module> module = moduleDao.findModuleAll();
 		for (int i = 0; i < module.size(); i++) {
 			filterMap.put(module.get(i).getModule_url(), "perms[" + module.get(i).getModule_code() + "]");
