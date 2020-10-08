@@ -15,7 +15,7 @@
 	$(function() {
 		init();
 	});
-
+  
 	function init() {
 		layui
 				.use(
@@ -30,32 +30,13 @@
 										,
 										toolbar : "#toolbar",
 										where : {
-											name : $("#sceneryname").val(),
-											address : $("#sceneryaddress")
-													.val(),
-											month : $("#scenerymonth").val(),
-											holiday : $("#sceneryholiday")
-													.val(),
-											upstarttime : $("#upstarttime")
-													.val(),
-											upendtime : $("#upendtime").val(),
-											publishstarttime : $(
-													"#publishstarttime").val(),
-											publishendtime : $(
-													"#publishendtime").val(),
-											unpublishstarttime : $(
-													"#unpublishstarttime")
-													.val(),
-											unpublishendtime : $(
-													"#unpublishendtime").val(),
-											publishstate : $("#publishstate")
-													.val()
+
 										},
 										id : "protab",
 										method : "post",
 										loading : true,
 										page : true,
-										url : "/LY/getScenery",
+										url : "",
 										height : 500 //容器高度
 										,
 										cols : [ [

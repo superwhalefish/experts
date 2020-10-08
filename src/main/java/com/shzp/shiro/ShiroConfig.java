@@ -20,7 +20,7 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 public class ShiroConfig {
 	@Autowired
 	private ModuleDao moduleDao;
-
+	
 	/**
 	 * 创建ShiroFilterFactoryBean 用户主题
 	 */
