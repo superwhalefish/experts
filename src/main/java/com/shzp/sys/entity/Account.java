@@ -22,12 +22,16 @@ private String lasttime;
 private String acc_state;
 private String acc_end;
 private String acc_start;
+
+private User user;
+
 public Account() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+
 public Account(Integer id, String acc_code, String acc_name, String acc_password, String user_code, String lasttime,
-		String acc_state, String acc_end, String acc_start) {
+		String acc_state, String acc_end, String acc_start, User user) {
 	super();
 	this.id = id;
 	this.acc_code = acc_code;
@@ -38,7 +42,9 @@ public Account(Integer id, String acc_code, String acc_name, String acc_password
 	this.acc_state = acc_state;
 	this.acc_end = acc_end;
 	this.acc_start = acc_start;
+	this.user = user;
 }
+
 public Integer getId() {
 	return id;
 }
@@ -93,11 +99,12 @@ public String getAcc_start() {
 public void setAcc_start(String acc_start) {
 	this.acc_start = acc_start;
 }
+
 @Override
 public String toString() {
 	return "Account [id=" + id + ", acc_code=" + acc_code + ", acc_name=" + acc_name + ", acc_password=" + acc_password
 			+ ", user_code=" + user_code + ", lasttime=" + lasttime + ", acc_state=" + acc_state + ", acc_end="
-			+ acc_end + ", acc_start=" + acc_start + "]";
+			+ acc_end + ", acc_start=" + acc_start + ", user=" + user + "]";
 }
 
 }

@@ -2,9 +2,194 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>测试一页</title>
+<title>账号信息管理</title>
+<link rel="stylesheet" href="js/layui/css/layui.css">
+<script type="text/javascript" src="js/layui/layui.js"></script>
+<script type="text/javascript"
+	src="js/jquery-easyui-1.9.7/jquery.min.js"></script>
 </head>
 <body>
-测试一页
+	<table id="usertab" lay-filter="test"></table>
 </body>
+<script type="text/javascript">
+	$(function() {
+		init();
+	});
+
+	function init() {
+		layui
+				.use(
+						[ 'table', 'form', 'laydate' ],
+						function() {
+							var table = layui.table;
+							var form = layui.form;
+							var laydate = layui.laydate;
+							table
+									.render({
+										elem : '#usertab' //指定原始表格元素选择器（推荐id选择器）
+										,
+										toolbar : "#toolbar",
+										where : {
+											name : $("#sceneryname").val(),
+											address : $("#sceneryaddress")
+													.val(),
+											month : $("#scenerymonth").val(),
+											holiday : $("#sceneryholiday")
+													.val(),
+											upstarttime : $("#upstarttime")
+													.val(),
+											upendtime : $("#upendtime").val(),
+											publishstarttime : $(
+													"#publishstarttime").val(),
+											publishendtime : $(
+													"#publishendtime").val(),
+											unpublishstarttime : $(
+													"#unpublishstarttime")
+													.val(),
+											unpublishendtime : $(
+													"#unpublishendtime").val(),
+											publishstate : $("#publishstate")
+													.val()
+										},
+										id : "protab",
+										method : "post",
+										loading : true,
+										page : true,
+										url : "/LY/getScenery",
+										height : 500 //容器高度
+										,
+										cols : [ [
+
+												{
+													field : 'id',
+													title : 'ID',
+													width : 45
+												},
+
+												{
+													field : "cname",
+													title : "类别",
+													width : 80,
+													templet : "<div>{{d.category.cname}}</div>"
+
+												},
+												{
+													field : 'name',
+													title : '景点名称',
+													width : 100
+												},
+												{
+													field : 'simg',
+													title : '图片',
+													width : 120,
+													templet : "#scenerysimg"
+												},
+												{
+													field : 'imgcode',
+													title : '图片编码',
+													width : 80
+												},
+												{
+													field : 'publishstate',
+													title : '发布状态',
+													width : 100,
+													templet : "#publishstateyouhua"
+												},
+												{
+													field : 'uptime',
+													title : '上传时间',
+													width : '80'
+												},
+												{
+													field : 'publishtime',
+													title : '上次发布时间',
+													width : '80'
+												},
+												{
+													field : 'address',
+													title : '景点地区',
+													width : 30
+												},
+												{
+													field : 'month',
+													title : '景点月份',
+													width : 60
+												},
+												{
+													field : 'holiday',
+													title : '相关产物',
+													width : 60
+												},
+												{
+													field : 'unpublishtime',
+													title : '上次撤回发布时间',
+													width : '80'
+												},
+												{
+													field : 'content',
+													title : '文章描述',
+													width : 210,
+													templet : "#scenerycontent"
+												},
+												{
+													field : 'linkman',
+													title : '联系人',
+													width : 60
+												},
+												{
+													field : 'tel',
+													title : '联系电话',
+													width : 60
+												},
+												{
+													field : 'car',
+													title : '自驾',
+													width : 160
+												},
+												{
+													field : 'bus',
+													title : '公交',
+													width : 160
+												},
+												{
+													type : 'radio',
+													width : 60
+												},
+												{
+													field : "asd",
+													title : "操作",
+													width : 130,
+													templet : function(d) {
+														return "<div><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='edit("
+																+ d.id
+																+ ")' >编辑</a><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='del("
+																+ d.id
+																+ ")' >删除</a> </div><div><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='upload("
+																+ d.id
+																+ ")' >上传</a></div>"
+													}
+												} ] ] //设置表头
+										//,…… //更多参数参考右侧目录：基本参数选项
+										,
+										limit : 10,
+										limits : [ 10, 20, 50 ]
+									});
+
+							/* 
+							开关监听器
+							form.on("switch(switchptstatus)", function(data) {
+								var selectIfKey = data.othis;
+								var parentTr = selectIfKey.parents("tr");
+								var id = $(parentTr).find("td:eq(0)").find(
+										".layui-table-cell").text();
+								if (data.elem.checked == true) {
+									
+								} else {
+								
+								}
+							}); */
+						})
+	}
+</script>
+
 </html>
