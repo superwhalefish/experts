@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shzp.product.dao.ProUtil">
+	<!-- 根据类别编号查询类别 -->
+	<select id="selProSpec" parameterType="String" resultType="ProSpec">
+		select * from pro_spec where speccode=#{speccode}
+	</select>
+	<select id="selProPrice" parameterType="String" resultType="ProPrice">
+		select * from pro_price where jdcode=#{jdcode}
+	</select>
+	<select id="selProBrand" parameterType="String" resultType="ProBrand">
+		select * from pro_brand where pbrandcode=#{pbrandcode}
+	</select>
+	<select id="selProUnit" parameterType="String" resultType="ProUnit">
+		select * from pro_unit where punitcode=#{punitcode}
+	</select>
+	<select id="selProWarehose" parameterType="String" resultType="ProWarehose">
+		select * from pro_warehouse where pcode=#{pcode}
+	</select>
+	<select id="selProStocks" parameterType="String" resultType="ProStocks">
+		select * from pro_stocks where typecode=#{typecode}
+	</select>
+	<select id="selProSpecType" parameterType="String" resultType="ProSpecType">
+		select * from pro_spectype where typecode=#{typecode}
+	</select>
+	<select id="selProTypeInfo" parameterType="String" resultType="ProTypeInfo">
+		select * from pro_typeinfo where typecode=#{typecode}
+	</select>
+	<select id="selProImg" parameterType="String" resultType="ProImg">
+		select * from pro_img where imgcode=#{imgcode}
+	</select>
+</mapper>

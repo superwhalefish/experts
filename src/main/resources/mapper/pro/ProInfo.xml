@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shzp.product.dao.ProInfoDao" >
+	<resultMap type="ProInfo" id="ProMapper">
+		<id column="id" property="id"/>
+		<result column="pname" property="pname"/>
+		<result column="ptypestate" property="ptypestate"/>
+		<result column="pweight" property="pweight"/>
+		<result column="pstate" property="pstate"/>
+		<result column="plimit" property="plimit"/>
+		<result column="starttime" property="starttime"/>
+		<result column="upstarttime" property="upstarttime"/>
+		<result column="poperate" property="poperate"/>
+		<result column="putawaytime" property="putawaytime"/>
+		<result column="prosaletime" property="prosaletime"/>
+		<result column="englishname" property="englishname"/>
+		<association property="ProSpec" select="com.shzp.product.dao.ProUtil.selProSpec" column="speccode" />
+		<association property="ProPrice" select="com.shzp.product.dao.ProUtil.selProPrice" column="jdcode" />
+		<association property="ProBrand" select="com.shzp.product.dao.ProUtil.selProBrand" column="pbrandcode" />
+		<association property="ProUnit" select="com.shzp.product.dao.ProUtil.selProUnit" column="punitcode" />
+		<association property="ProWarehose" select="com.shzp.product.dao.ProUtil.selProWarehose" column="pcode" />
+		<association property="ProStocks" select="com.shzp.product.dao.ProUtil.selProStocks" column="typecode" />
+		<association property="ProSpecType" select="com.shzp.product.dao.ProUtil.selProSpecType" column="typecode" />
+		<association property="ProTypeInfo" select="com.shzp.product.dao.ProUtil.selProTypeInfo" column="typecode" />
+		<association property="ProImg" select="com.shzp.product.dao.ProUtil.selProImg" column="imgcode" />
+	</resultMap>
+	<select id="ProInfoAll" parameterType="ProInfo" resultType="list">
+		
+	</select>
+</mapper>
