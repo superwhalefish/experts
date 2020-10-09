@@ -10,4 +10,11 @@ public interface UserDao {
 	 * @return	用户信息
 	 */
 	User findUserByUser_code(String user_code);
+	/**
+	 * 根据用户编号查询用户名称
+	 * 
+	 * @param user_code 用户名称
+	 * @return	用户信息
+	 */
+	User findUserByUser_name(String user_code);
 }

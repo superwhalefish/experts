@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Table(name = "acc_account")
@@ -48,56 +49,85 @@ public Account(Integer id, String acc_code, String acc_name, String acc_password
 public Integer getId() {
 	return id;
 }
+
 public void setId(Integer id) {
 	this.id = id;
 }
+
 public String getAcc_code() {
 	return acc_code;
 }
+
 public void setAcc_code(String acc_code) {
 	this.acc_code = acc_code;
 }
+
 public String getAcc_name() {
 	return acc_name;
 }
+
 public void setAcc_name(String acc_name) {
 	this.acc_name = acc_name;
 }
+
 public String getAcc_password() {
 	return acc_password;
 }
+
 public void setAcc_password(String acc_password) {
 	this.acc_password = acc_password;
 }
+
 public String getUser_code() {
 	return user_code;
 }
+
 public void setUser_code(String user_code) {
 	this.user_code = user_code;
 }
+
 public String getLasttime() {
 	return lasttime;
 }
+
 public void setLasttime(String lasttime) {
 	this.lasttime = lasttime;
 }
+
 public String getAcc_state() {
 	return acc_state;
 }
+
 public void setAcc_state(String acc_state) {
 	this.acc_state = acc_state;
 }
+
 public String getAcc_end() {
 	return acc_end;
 }
+
 public void setAcc_end(String acc_end) {
 	this.acc_end = acc_end;
 }
+
 public String getAcc_start() {
 	return acc_start;
 }
+
 public void setAcc_start(String acc_start) {
 	this.acc_start = acc_start;
+}
+
+public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
+}
+
+public static long getSerialversionuid() {
+	return serialVersionUID;
 }
 
 @Override
@@ -106,5 +136,6 @@ public String toString() {
 			+ ", user_code=" + user_code + ", lasttime=" + lasttime + ", acc_state=" + acc_state + ", acc_end="
 			+ acc_end + ", acc_start=" + acc_start + ", user=" + user + "]";
 }
+
 
 }

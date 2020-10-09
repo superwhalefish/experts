@@ -20,13 +20,13 @@ public interface AccountDao {
 	 * @param account
 	 * @return
 	 */
-	List<Account> getAccount(SysFenye fenye);
+	List<Account> getAccount(SysFenye sysFenye);
 	/**
 	 * 统计账号信息
 	 * 
 	 * @param account
 	 * @return
 	 */
-	Integer getAccountCount (SysFenye fenye);
+	Integer getAccountCount (SysFenye sysFenye);
 
 }
