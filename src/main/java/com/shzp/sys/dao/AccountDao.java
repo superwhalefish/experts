@@ -21,12 +21,29 @@ public interface AccountDao {
 	 * @return
 	 */
 	List<Account> getAccount(SysFenye sysFenye);
+
 	/**
 	 * 统计账号信息
 	 * 
 	 * @param account
 	 * @return
 	 */
-	Integer getAccountCount (SysFenye sysFenye);
+	Integer getAccountCount(SysFenye sysFenye);
+
+	/**
+	 * 修改账号信息
+	 * 
+	 * @param account
+	 * @return
+	 */
+	Integer updateAccount(Account account);
+
+	/**
+	 * 根据acc_code查询账号信息
+	 * 
+	 * @param acc_code
+	 * @return
+	 */
+	List<Account> getAccountInfo(String acc_code);
 
 }

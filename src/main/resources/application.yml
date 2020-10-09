@@ -29,7 +29,7 @@ server:
     context-path: /SH
 logging:
   level:
-    com.yy.spring.dao: debug
+    com.shzp.*.dao: debug
 mybatis:
   type-aliases-package: com.shzp.*.entity
   mapper-locations:

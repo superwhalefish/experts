@@ -42,7 +42,6 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// TODO Auto-generated method stub
-		System.out.println("执行授权逻辑");
 		// 给资源进行授权
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
@@ -62,7 +61,6 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
 		// TODO Auto-generated method stub
-		System.out.println("执行认证逻辑");
 		// 编写shiro认证逻辑，判断用户名和密码
 		// 判断用户名
 		UsernamePasswordToken token = (UsernamePasswordToken) arg0;

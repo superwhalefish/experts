@@ -43,5 +43,18 @@ public class AccountServiceImpl implements AccountService {
 		map.put("data", account);
 		return map;
 	}
+	@Override
+	public Integer updateAccount(Account account) {
+		// TODO Auto-generated method stub
+		return accountDao.updateAccount(account);
+	}
+
+	@Override
+	public List<Account> getAccountInfo(String acc_code) {
+		// TODO Auto-generated method stub
+		List<Account> accountlist = accountDao.getAccountInfo(acc_code);
+		System.out.println(accountlist);
+		return accountlist;
+	}
 
 }

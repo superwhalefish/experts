@@ -1,5 +1,6 @@
 package com.shzp.sys.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -87,6 +88,25 @@ public class AccountController {
 		Map<String, Object> account2 = accountService.getAccount(sysFenye);
 		return account2;
 
+	}
+
+	/**
+	 * 修改账号信息 （暂未操作记录表）
+	 * 
+	 * @param account
+	 * @return
+	 */
+	@RequestMapping(value = "/updateAccount", method = RequestMethod.POST)
+	@ResponseBody
+	public Integer updateAccount(Account account) {
+		return accountService.updateAccount(account);
+	}
+
+	@RequestMapping(value = "/getAccountInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Account> getAccountInfo(String acc_code) {
+
+		return accountService.getAccountInfo(acc_code);
 	}
 
 }

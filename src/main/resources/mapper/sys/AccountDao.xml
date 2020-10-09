@@ -34,7 +34,11 @@
 		<if test="account.acc_state !=null and account.acc_state !=''">
 		and acc_state =#{account.acc_state}
 		</if>
+		<if test="account.acc_code!=null and account.acc_code !=''">
+		and acc_code=#{account.acc_code}
+		</if>
 		</where>
+		ORDER BY id DESC
 		limit #{page},#{limit}
 	</select>
 	
@@ -52,8 +56,32 @@
 		<if test="account.acc_state !=null and account.acc_state !=''">
 		and acc_state =#{account.acc_state}
 		</if>
+		<if test="account.acc_code!=null and account.acc_code !=''">
+		and acc_code=#{account.acc_code}
+		</if>
 		</where>
 	</select>
+	<!-- 更新账号信息 -->
+	<update id="updateAccount" parameterType="Account">
+		update sys_account  
+		<set>
+			<if test="acc_state !=null and acc_state !=''">
+			acc_state =#{acc_state},
+			</if>
+			<if test="acc_password !=null and acc_password !=''">
+			acc_password =#{acc_password},
+			</if>
+		</set>
+		<where>
+		<if test="acc_code !=null and acc_code !=''">
+		and acc_code =#{acc_code}
+		</if>
+		</where>
+		
+	</update>
 	
-	
+	<!-- 根据acc_code查询账号详情 -->
+	<select id="getAccountInfo" parameterType="String" resultMap="accAndUserMap">
+	SELECT * FROM `sys_account` where acc_code =#{acc_code}
+	</select>
 </mapper>

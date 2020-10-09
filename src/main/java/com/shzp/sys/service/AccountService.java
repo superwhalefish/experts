@@ -15,4 +15,16 @@ public interface AccountService {
 	 * @return
 	 */
 	Map<String,Object> getAccount(SysFenye sysFenye);
+	/**
+	 * 动态修改账号信息
+	 * @param account
+	 * @return
+	 */
+	Integer updateAccount(Account account);
+	/**
+	 * 获取账号信息
+	 * @param acc_code
+	 * @return
+	 */
+	List<Account> getAccountInfo(String acc_code);
 }

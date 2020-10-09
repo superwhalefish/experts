@@ -22,14 +22,15 @@ public class User implements Serializable {
 	private String user_tel;
 	private String user_qq;
 	private String user_email;
-
+private String user_img;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public User(Integer id, String user_name, String user_code, String position_code, String user_tel, String user_qq,
-			String user_email) {
+			String user_email, String user_img) {
 		super();
 		this.id = id;
 		this.user_name = user_name;
@@ -38,7 +39,9 @@ public class User implements Serializable {
 		this.user_tel = user_tel;
 		this.user_qq = user_qq;
 		this.user_email = user_email;
+		this.user_img = user_img;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -47,6 +50,16 @@ public class User implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public String getUser_img() {
+		return user_img;
+	}
+
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
+	}
+
 
 	public String getUser_name() {
 		return user_name;
@@ -100,11 +113,13 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", user_name=" + user_name + ", user_code=" + user_code + ", position_code="
 				+ position_code + ", user_tel=" + user_tel + ", user_qq=" + user_qq + ", user_email=" + user_email
-				+ "]";
+				+ ", user_img=" + user_img + "]";
 	}
+
 
 }

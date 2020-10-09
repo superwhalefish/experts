@@ -7,15 +7,23 @@
 <script type="text/javascript" src="../js/layui/layui.js"></script>
 <script type="text/javascript"
 	src="../js/jquery-easyui-1.9.7/jquery.min.js"></script>
+<script type="text/javascript" src="../js/vue/vue.js"></script>
+
 </head>
 <style>
-.layui-table-cell {
+/* .layui-table-cell {
 	display: table-cell;
 	vertical-align: middle;
+} */
+.layui-table-cell {
+	height: inherit;
 }
 </style>
 <body>
 	<table id="usertab" lay-filter="test"></table>
+
+
+
 	<script type="text/html" id="acc_state">
 		<input type="checkbox" name="open" value="{{d.publishstate}}" lay-skin="switch" lay-text="正在使用|已停用 " lay-filter="switchptstatus" {{ d.acc_state=='1' ? 'checked' : '' }} data-id="{{d.id}}">
 	</script>
@@ -39,11 +47,79 @@
 						</select>
 		</div>
 		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索</a>
-		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='addaccount()'>添加</a>
 </form>
 </script>
+
+
+	<!-- 详情 -->
+	<div id="look" hidden="hidden">
+		<table v-for="(item,index) in AList" spacing="5">
+			<tr>
+				<td>名称</td>
+				<td>{{item.user.user_name}}</td>
+				<td rowspan="3" colspan="2"><img :src="item.user.user_img"
+					alt="图片类别首图连接" class="img-thumbnail" width="50px" height="50px" />
+				</td>
+			</tr>
+			<tr>
+				<td>账号</td>
+				<td>{{item.acc_name}}</td>
+			</tr>
+			<tr>
+				<td>使用状态</td>
+				<td v-if="item.acc_state =='2'">已被停用</td>
+				<td v-if="item.acc_state == '1'">正在使用</td>
+			</tr>
+		</table>
+
+	</div>
+
+
 </body>
 <script type="text/javascript">
+	function look(acc_code) {
+		var app = new Vue({
+			el : "#look",
+			data : {
+				AList : []
+			},
+			mounted : function() {
+				this.getAccountInfo();
+			},
+			methods : {
+				getAccountInfo : function() {
+					this.$forceUpdate();
+					var that = this;
+					layer.open({
+						type : 1,
+						offset : '100px',
+						area : [ '610px', '600px' ],
+						content : $("#look"),
+						btn : [ "提交", "关闭" ],
+						yes : function() {
+
+						},
+						btn2 : function() {
+							close();
+						}/* ,
+						success : function(layero, index) {
+							//重新渲染
+							$.post("/SH/auth/getAccountInfo", {
+								acc_code : acc_code
+							}, function(res) {
+								that.AList = res;
+
+							})
+
+						} */
+					});
+
+				}
+			}
+		})
+
+	}
+
 	$(function() {
 		init();
 	});
@@ -69,13 +145,13 @@
 											acc_state : $.trim($(
 													"#searchacc_state").val())
 										},
+
 										id : "protab",
 										method : "post",
 										loading : true,
 										page : true,
 										url : "/SH/auth/getAccount",
-										height : 500 //容器高度
-										,
+										height : 'full-100',
 										cols : [ [
 												{
 													field : "acc_code",
@@ -111,9 +187,9 @@
 													fixed : "right",
 													title : "操作",
 													templet : function(d) {
-														return "<div><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='edit("
-																+ d.id
-																+ ")' >编辑</a><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='del("
+														return "<div><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='look("
+																+ d.acc_code
+																+ ")' >查看</a><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='del("
 																+ d.id
 																+ ")' >删除</a> </div>"
 													}
@@ -128,9 +204,27 @@
 										.find(".layui-table-cell").text();
 								if (data.elem.checked == true) {
 									//状态设置为1    开始使用
-
+									$.post("/SH/auth/updateAccount", {
+										acc_code : acc_code,
+										acc_state : 1
+									}, function(res) {
+										if (res > 0) {
+											layer.msg('设置成功');
+										} else {
+											layer.msg('服务器繁忙，请稍后重试.....');
+										}
+									})
 								} else {
-
+									$.post("/SH/auth/updateAccount", {
+										acc_code : acc_code,
+										acc_state : 2
+									}, function(res) {
+										if (res > 0) {
+											layer.msg('设置成功');
+										} else {
+											layer.msg('服务器繁忙，请稍后重试.....');
+										}
+									})
 								}
 							});
 						})
