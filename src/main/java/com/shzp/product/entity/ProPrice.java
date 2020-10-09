@@ -6,17 +6,19 @@ public class ProPrice {
 	private String ppifa;//1
 	private String ppifal;//2
 	private String pricestate;//
+	private String jgcode;
 	public ProPrice() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProPrice(Integer id, String plingshou, String ppifa, String ppifal, String pricestate) {
+	public ProPrice(Integer id, String plingshou, String ppifa, String ppifal, String pricestate, String jgcode) {
 		super();
 		this.id = id;
 		this.plingshou = plingshou;
 		this.ppifa = ppifa;
 		this.ppifal = ppifal;
 		this.pricestate = pricestate;
+		this.jgcode = jgcode;
 	}
 	public Integer getId() {
 		return id;
@@ -48,10 +50,16 @@ public class ProPrice {
 	public void setPricestate(String pricestate) {
 		this.pricestate = pricestate;
 	}
+	public String getJgcode() {
+		return jgcode;
+	}
+	public void setJgcode(String jgcode) {
+		this.jgcode = jgcode;
+	}
 	@Override
 	public String toString() {
 		return "ProPrice [id=" + id + ", plingshou=" + plingshou + ", ppifa=" + ppifa + ", ppifal=" + ppifal
-				+ ", pricestate=" + pricestate + "]";
+				+ ", pricestate=" + pricestate + ", jgcode=" + jgcode + "]";
 	}
 	
 	

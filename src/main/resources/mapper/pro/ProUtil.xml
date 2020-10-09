@@ -6,7 +6,7 @@
 		select * from pro_spec where speccode=#{speccode}
 	</select>
 	<select id="selProPrice" parameterType="String" resultType="ProPrice">
-		select * from pro_price where jdcode=#{jdcode}
+		select * from pro_price where jgcode=#{jgcode}
 	</select>
 	<select id="selProBrand" parameterType="String" resultType="ProBrand">
 		select * from pro_brand where pbrandcode=#{pbrandcode}

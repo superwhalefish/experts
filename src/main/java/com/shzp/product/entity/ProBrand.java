@@ -1,5 +1,8 @@
 package com.shzp.product.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProBrand {
 	private Integer id;
 	private String bname;

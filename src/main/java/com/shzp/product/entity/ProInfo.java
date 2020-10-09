@@ -1,11 +1,14 @@
 package com.shzp.product.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProInfo {
 	private Integer id;
 	private String pcode;
 	private String speccode;
 	private String pname;
-	private Integer pprice;
+	private String pprice;
 	private Integer ptypestate;
 	private String pweight;
 	private Integer pstate;
@@ -34,22 +37,17 @@ public class ProInfo {
 	private ProWarehose proWarehose;
 	//库存
 	private ProStocks proStocks;
-	//规格类别
-	private ProSpecType proSpecType;
-	//规格详情
-	private ProTypeInfo proTypeInfo;
 	//图片
 	private ProImg proImg;
 	public ProInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProInfo(Integer id, String pcode, String speccode, String pname, Integer pprice, Integer ptypestate,
+	public ProInfo(Integer id, String pcode, String speccode, String pname, String pprice, Integer ptypestate,
 			String pweight, Integer pstate, Integer plimit, String pbrandcode, String punitcode, String pwarehousecode,
 			String pstockscode, String starttime, String upstarttime, String poperate, String putawaytime,
 			String prosaletime, String englishname, String imgcode, ProSpec proSpec, ProPrice proPrice,
-			ProBrand proBrand, ProUnit proUnit, ProWarehose proWarehose, ProStocks proStocks, ProSpecType proSpecType,
-			ProTypeInfo proTypeInfo, ProImg proImg) {
+			ProBrand proBrand, ProUnit proUnit, ProWarehose proWarehose, ProStocks proStocks, ProImg proImg) {
 		super();
 		this.id = id;
 		this.pcode = pcode;
@@ -77,8 +75,6 @@ public class ProInfo {
 		this.proUnit = proUnit;
 		this.proWarehose = proWarehose;
 		this.proStocks = proStocks;
-		this.proSpecType = proSpecType;
-		this.proTypeInfo = proTypeInfo;
 		this.proImg = proImg;
 	}
 	public Integer getId() {
@@ -105,10 +101,10 @@ public class ProInfo {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public Integer getPprice() {
+	public String getPprice() {
 		return pprice;
 	}
-	public void setPprice(Integer pprice) {
+	public void setPprice(String pprice) {
 		this.pprice = pprice;
 	}
 	public Integer getPtypestate() {
@@ -237,18 +233,6 @@ public class ProInfo {
 	public void setProStocks(ProStocks proStocks) {
 		this.proStocks = proStocks;
 	}
-	public ProSpecType getProSpecType() {
-		return proSpecType;
-	}
-	public void setProSpecType(ProSpecType proSpecType) {
-		this.proSpecType = proSpecType;
-	}
-	public ProTypeInfo getProTypeInfo() {
-		return proTypeInfo;
-	}
-	public void setProTypeInfo(ProTypeInfo proTypeInfo) {
-		this.proTypeInfo = proTypeInfo;
-	}
 	public ProImg getProImg() {
 		return proImg;
 	}
@@ -264,9 +248,6 @@ public class ProInfo {
 				+ upstarttime + ", poperate=" + poperate + ", putawaytime=" + putawaytime + ", prosaletime="
 				+ prosaletime + ", englishname=" + englishname + ", imgcode=" + imgcode + ", proSpec=" + proSpec
 				+ ", proPrice=" + proPrice + ", proBrand=" + proBrand + ", proUnit=" + proUnit + ", proWarehose="
-				+ proWarehose + ", proStocks=" + proStocks + ", proSpecType=" + proSpecType + ", proTypeInfo="
-				+ proTypeInfo + ", proImg=" + proImg + "]";
+				+ proWarehose + ", proStocks=" + proStocks + ", proImg=" + proImg + "]";
 	}
-	
-	
 }

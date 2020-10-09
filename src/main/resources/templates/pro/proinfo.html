@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商品信息管理</title>
+<link rel="stylesheet" href="../js/layui/css/layui.css">
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript"
+	src="../js/jquery-easyui-1.9.7/jquery.min.js"></script>
+
+<style>
+.layui-table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+</style>
+</head>
+<script type="text/html" id="proInfoToolbar">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/javascript">
+$(function() {
+	init();
+});
+
+function init() {
+	layui.use(
+					 'table' ,
+					function() {
+						var table = layui.table;
+						var form = layui.form;
+						var laydate = layui.laydate;
+						var laypage = layui.laypage; //分页
+						table.render({
+									elem : '#ProInfoTab', //指定原始表格元素选择器（推荐id选择器）
+									method : "post",
+									loading : true,
+									page : true,
+									limit : 10,
+									limits : [ 10, 20, 50 ],
+									url : "/SH/pro/info",
+									height : 500, //容器高度
+									toolbar: 'default',
+									cols : [ [
+										{field : "id",title : "id"},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{field : 'pname',title : '商品'},
+										{fixed: 'right',title:'操作', width: 165, align:'center', toolbar: '#proInfoToolbar'} 
+									] ]
+								});
+					})
+}
+</script>
+<body>
+	<table id="ProInfoTab" lay-filter="test"></table>
+</body>
+</html>
+

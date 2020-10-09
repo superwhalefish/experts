@@ -47,7 +47,7 @@
 				<div class="layui-side-scroll">
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 					<ul class="layui-nav layui-nav-tree" >
-						<li class="layui-nav-item layui-nav-itemed">
+						<li class="layui-nav-item"><!--  layui-nav-itemed 导航栏是否打开 -->
 							<a class="" href="javascript:;">系统管理</a>
 							<dl class="layui-nav-child">
 								<dd shiro:hasPermission="111111111">
@@ -61,6 +61,14 @@
 								</dd>
 								<dd shiro:hasPermission="111111114">
 									<a data-url="system/test4" data-id="4" data-title="列表4"   href="javascript:;" data-type="tabAdd">列表4</a>
+								</dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item "><!-- layui-nav-itemed 打开状态 -->
+							<a class="" href="javascript:;">商品管理</a>
+							<dl class="layui-nav-child">
+								<dd shiro:hasPermission="111111115">
+									<a data-url="proinfo/proinfo" data-id="4" data-title="商品信息"   href="javascript:;" data-type="tabAdd">商品管理</a>
 								</dd>
 							</dl>
 						</li>
