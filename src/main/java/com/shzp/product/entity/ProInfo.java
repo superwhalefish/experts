@@ -9,10 +9,10 @@ public class ProInfo {
 	private String speccode;
 	private String pname;
 	private String pprice;
-	private Integer ptypestate;
+	private String ptypestate;
 	private String pweight;
-	private Integer pstate;
-	private Integer plimit;
+	private String pstate;
+	private String plimit;
 	private String pbrandcode;
 	private String punitcode;
 	private String pwarehousecode;
@@ -39,12 +39,17 @@ public class ProInfo {
 	private ProStocks proStocks;
 	//图片
 	private ProImg proImg;
+	
+	
+	
+	
+	
 	public ProInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProInfo(Integer id, String pcode, String speccode, String pname, String pprice, Integer ptypestate,
-			String pweight, Integer pstate, Integer plimit, String pbrandcode, String punitcode, String pwarehousecode,
+	public ProInfo(Integer id, String pcode, String speccode, String pname, String pprice, String ptypestate,
+			String pweight, String pstate, String plimit, String pbrandcode, String punitcode, String pwarehousecode,
 			String pstockscode, String starttime, String upstarttime, String poperate, String putawaytime,
 			String prosaletime, String englishname, String imgcode, ProSpec proSpec, ProPrice proPrice,
 			ProBrand proBrand, ProUnit proUnit, ProWarehose proWarehose, ProStocks proStocks, ProImg proImg) {
@@ -107,10 +112,10 @@ public class ProInfo {
 	public void setPprice(String pprice) {
 		this.pprice = pprice;
 	}
-	public Integer getPtypestate() {
+	public String getPtypestate() {
 		return ptypestate;
 	}
-	public void setPtypestate(Integer ptypestate) {
+	public void setPtypestate(String ptypestate) {
 		this.ptypestate = ptypestate;
 	}
 	public String getPweight() {
@@ -119,16 +124,16 @@ public class ProInfo {
 	public void setPweight(String pweight) {
 		this.pweight = pweight;
 	}
-	public Integer getPstate() {
+	public String getPstate() {
 		return pstate;
 	}
-	public void setPstate(Integer pstate) {
+	public void setPstate(String pstate) {
 		this.pstate = pstate;
 	}
-	public Integer getPlimit() {
+	public String getPlimit() {
 		return plimit;
 	}
-	public void setPlimit(Integer plimit) {
+	public void setPlimit(String plimit) {
 		this.plimit = plimit;
 	}
 	public String getPbrandcode() {
@@ -250,4 +255,5 @@ public class ProInfo {
 				+ ", proPrice=" + proPrice + ", proBrand=" + proBrand + ", proUnit=" + proUnit + ", proWarehose="
 				+ proWarehose + ", proStocks=" + proStocks + ", proImg=" + proImg + "]";
 	}
+	
 }

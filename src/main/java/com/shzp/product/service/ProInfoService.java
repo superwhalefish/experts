@@ -7,10 +7,5 @@ import com.shzp.product.entity.proFenye;
 import com.shzp.product.entity.ProInfo;
 
 public interface ProInfoService {
-	/**
-	 * 分页
-	 * @param info
-	 * @return
-	 */
-	Map<String, Object> selProInfo(proFenye<ProInfo> fenye);
+	Map<String, Object> selProInfo(proFenye<ProInfo> profenye);
 }

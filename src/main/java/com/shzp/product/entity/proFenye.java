@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class proFenye<T> {
 	private Integer page;
 	private Integer limit;
+	private Integer count;
 	private List<T> rows;
 	//参数
 	private T t;
@@ -15,10 +16,11 @@ public class proFenye<T> {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public proFenye(Integer page, Integer limit, List<T> rows, T t) {
+	public proFenye(Integer page, Integer limit, Integer count, List<T> rows, T t) {
 		super();
 		this.page = page;
 		this.limit = limit;
+		this.count = count;
 		this.rows = rows;
 		this.t = t;
 	}
@@ -34,6 +36,12 @@ public class proFenye<T> {
 	public void setLimit(Integer limit) {
 		this.limit = limit;
 	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 	public List<T> getRows() {
 		return rows;
 	}
@@ -48,7 +56,8 @@ public class proFenye<T> {
 	}
 	@Override
 	public String toString() {
-		return "proFenye [page=" + page + ", limit=" + limit + ", rows=" + rows + ", t=" + t + "]";
+		return "proFenye [page=" + page + ", limit=" + limit + ", count=" + count + ", rows=" + rows + ", t=" + t + "]";
 	}
+	
 	
 }
