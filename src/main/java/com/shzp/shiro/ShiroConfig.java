@@ -47,6 +47,8 @@ public class ShiroConfig {
 		}
 		// 拦截页面
 		filterMap.put("/system/*", "authc");
+		filterMap.put("/proinfo/*", "authc");
+		
 		//logout是shiro提供的过滤器,这是走自定义的 shiroLogoutFilter 上面有配置
 		filterMap.put("/index", "logout");
 		// 无用户登录跳转页面

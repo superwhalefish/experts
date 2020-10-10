@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shzp.product.dao.ProInfoDao" >
+	<resultMap type="com.shzp.product.entity.ProInfo" id="ProMapper">
+		<id column="id" property="id"/>
+		<result column="pcode" property="pcode"/>
+		<result column="pname" property="pname"/>
+		<result column="ptypestate" property="ptypestate"/>
+		<result column="pweight" property="pweight"/>
+		<result column="pstate" property="pstate"/>
+		<result column="plimit" property="plimit"/>
+		<result column="starttime" property="starttime"/>
+		<result column="upstarttime" property="upstarttime"/>
+		<result column="poperate" property="poperate"/>
+		<result column="putawaytime" property="putawaytime"/>
+		<result column="prosaletime" property="prosaletime"/>
+		<result column="englishname" property="englishname"/>
+		
+		
+		
+		
+		<!-- 链表操作，对查询语句 -->
+		<association property="proSpec" select="com.shzp.product.dao.ProUtil.selProSpec" column="speccode" />
+		<association property="proPrice" select="com.shzp.product.dao.ProUtil.selProPrice" column="pprice" />
+		<association property="proBrand" select="com.shzp.product.dao.ProUtil.selProBrand" column="pbrandcode" />
+		<association property="proUnit" select="com.shzp.product.dao.ProUtil.selProUnit" column="punitcode" />
+		<association property="proWarehose" select="com.shzp.product.dao.ProUtil.selProWarehose" column="pwarehousecode" />
+		<association property="proStocks" select="com.shzp.product.dao.ProUtil.selProStocks" column="pstockscode" />
+<!-- 		<association property="proSpecType" select="com.shzp.product.dao.ProUtil.selProSpecType" column="typecode" />
+		<association property="proTypeInfo" select="com.shzp.product.dao.ProUtil.selProTypeInfo" column="typecode" /> -->
+		<association property="proImg" select="com.shzp.product.dao.ProUtil.selProImg" column="imgcode" />
+	</resultMap>
+	<!-- 查询 -->
+	<select id="selProInfo" parameterType="com.shzp.product.entity.proFenye"  resultMap="ProMapper">
+		select * from pro_info p
+		<where>
+				<if test="t.pname !='' and t.pname !=null">
+					and p.pname like "%"#{t.pname}"%"
+				</if>
+				<if test="t.speccode !='' and t.speccode !=null">
+					and p.speccode=#{t.speccode}
+				</if>
+				<if test="t.pstate =!'' and t.pstate !=null ">
+					and p.pstate=#{t.pstate}
+				</if>
+				<if test="t.plimit =!'' and t.plimit !=null ">
+					and p.plimit=#{t.plimit}
+				</if>
+				<if test="t.pbrandcode =!'' and t.pbrandcode !=null ">
+					and p.pbrandcode=#{t.pbrandcode}
+				</if>
+				<if test="t.pwarehousecode =!'' and t.pwarehousecode !=null ">
+					and p.pwarehousecode=#{t.pwarehousecode}
+				</if>
+		</where>
+		limit #{page},#{limit}
+	</select>
+	<select id="selProInfoCount" parameterType="com.shzp.product.entity.proFenye" resultType="int">
+		select count(p.id) from pro_info p
+		<where>
+			<if test="t.pname !='' and t.pname !=null">
+					and p.pname like "%"#{t.pname}"%"
+				</if>
+				<if test="t.speccode !='' and t.speccode !=null">
+					and p.speccode=#{t.speccode}
+				</if>
+				<if test="t.pstate =!'' and t.pstate !=null ">
+					and p.pstate=#{t.pstate}
+				</if>
+				<if test="t.plimit =!'' and t.plimit !=null ">
+					and p.plimit=#{t.plimit}
+				</if>
+				<if test="t.pbrandcode =!'' and t.pbrandcode !=null ">
+					and p.pbrandcode=#{t.pbrandcode}
+				</if>
+				<if test="t.pwarehousecode =!'' and t.pwarehousecode !=null ">
+					and p.pwarehousecode=#{t.pwarehousecode}
+				</if>
+		</where>
+	</select>
+</mapper>
