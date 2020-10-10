@@ -17,11 +17,10 @@ public class GlobalExceptionHandler{
      * @param e
      * @return
      */
-    @ExceptionHandler(value=Exception.class)
-    public Object exceptionHandler(Exception e) {
-        e.printStackTrace();
-        return "error";
-    }
+	/*
+	 * @ExceptionHandler(value=Exception.class) public Object
+	 * exceptionHandler(Exception e) { e.printStackTrace(); return "error"; }
+	 */
 
  
    

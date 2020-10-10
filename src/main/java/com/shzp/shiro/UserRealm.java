@@ -8,6 +8,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -25,6 +26,7 @@ import com.shzp.sys.dao.ModuleDao;
 import com.shzp.sys.dao.RoleModuleDao;
 import com.shzp.sys.entity.Account;
 import com.shzp.sys.entity.Module;
+import com.shzp.utils.MD5Plus;
 
 public class UserRealm extends AuthorizingRealm {
 	// 业务注入
@@ -53,6 +55,7 @@ public class UserRealm extends AuthorizingRealm {
 		List<String> moduleCodes = roleModuleDao.findModuleCodeByRoleCode(roleCodes);
 		// 添加资源的授权 字符串需和shiro配置认证授权perms[]内的内容保持一直
 		info.addStringPermissions(moduleCodes);
+		//152A7E134B50BF8B97599A6B35EDA628
 		return info;
 	}
 	/**
@@ -64,14 +67,20 @@ public class UserRealm extends AuthorizingRealm {
 		// 编写shiro认证逻辑，判断用户名和密码
 		// 判断用户名
 		UsernamePasswordToken token = (UsernamePasswordToken) arg0;
-		
+		System.out.println("获取密码"+new String(token.getPassword()));
 		Account user = accountDao.findByAcc_name(token.getUsername());
 		if (user == null) {
 			return null;// shiro底层将抛出UnKnownAccountException异常
 		}
+		if(!"1".equals(user.getAcc_state())) {
+			throw new LockedAccountException();
+		}
 		// 判断密码
 		// 第一个参数是subject.login(token)的数据 第二个参数是数据库密码 第三个参数是盐–用于加密密码对比 第四个密码是shiro的名字
-		return new SimpleAuthenticationInfo(user, user.getAcc_password(), "");
+		
+		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, user.getAcc_password(), getName());
+		
+		return simpleAuthenticationInfo;
 	}
 
 }

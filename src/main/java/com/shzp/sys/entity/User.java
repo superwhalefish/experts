@@ -22,15 +22,17 @@ public class User implements Serializable {
 	private String user_tel;
 	private String user_qq;
 	private String user_email;
-private String user_img;
+	private String user_img;
+	private String user_accountstate;
+	private String user_english;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public User(Integer id, String user_name, String user_code, String position_code, String user_tel, String user_qq,
-			String user_email, String user_img) {
+			String user_email, String user_img, String user_accountstate, String user_english) {
 		super();
 		this.id = id;
 		this.user_name = user_name;
@@ -40,11 +42,28 @@ private String user_img;
 		this.user_qq = user_qq;
 		this.user_email = user_email;
 		this.user_img = user_img;
+		this.user_accountstate = user_accountstate;
+		this.user_english = user_english;
 	}
 
+	public String getUser_english() {
+		return user_english;
+	}
+
+	public void setUser_english(String user_english) {
+		this.user_english = user_english;
+	}
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getUser_accountstate() {
+		return user_accountstate;
+	}
+
+	public void setUser_accountstate(String user_accountstate) {
+		this.user_accountstate = user_accountstate;
 	}
 
 	public void setId(Integer id) {
@@ -55,11 +74,9 @@ private String user_img;
 		return user_img;
 	}
 
-
 	public void setUser_img(String user_img) {
 		this.user_img = user_img;
 	}
-
 
 	public String getUser_name() {
 		return user_name;
@@ -113,13 +130,12 @@ private String user_img;
 		return serialVersionUID;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", user_name=" + user_name + ", user_code=" + user_code + ", position_code="
 				+ position_code + ", user_tel=" + user_tel + ", user_qq=" + user_qq + ", user_email=" + user_email
-				+ ", user_img=" + user_img + "]";
+				+ ", user_img=" + user_img + ", user_accountstate=" + user_accountstate + ", user_english="
+				+ user_english + "]";
 	}
-
 
 }

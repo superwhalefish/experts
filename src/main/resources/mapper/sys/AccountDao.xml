@@ -2,86 +2,101 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shzp.sys.dao.AccountDao">
 
-<resultMap type="Account" id="accAndUserMap">
-<id column="id" property="id"/>
-<result column="acc_code" property="acc_code"/>
-<result column="acc_name" property="acc_name"/>
-<result column="acc_password" property="acc_password"/>
-<result column="user_code" property="user_code"/>
-<result column="lasttime" property="lasttime"/>
-<result column="acc_state" property="acc_state"/>
-<result column="acc_end" property="acc_end"/>
-<result column="acc_start" property="acc_start"/>
-<association property="user" select="com.shzp.sys.dao.UserDao.findUserByUser_code" column="user_code"></association>
-</resultMap>
+	<resultMap type="Account" id="accAndUserMap">
+		<id column="id" property="id" />
+		<result column="acc_code" property="acc_code" />
+		<result column="acc_name" property="acc_name" />
+		<result column="acc_password" property="acc_password" />
+		<result column="user_code" property="user_code" />
+		<result column="lasttime" property="lasttime" />
+		<result column="acc_state" property="acc_state" />
+		<result column="acc_end" property="acc_end" />
+		<result column="acc_start" property="acc_start" />
+		<association property="user"
+			select="com.shzp.sys.dao.UserDao.findUserByUser_code"
+			column="user_code"></association>
+	</resultMap>
 
 	<!-- 根据账号查询账号信息信息 -->
 	<select id="findByAcc_name" parameterType="String"
 		resultType="com.shzp.sys.entity.Account">
-		SELECT id,acc_code,acc_name,acc_password,user_code FROM `sys_account` where
+		SELECT * FROM
+		`sys_account` where
 		acc_name=#{acc_name};
 	</select>
 	<!-- 根据条件查询账号相关信息 -->
-	<select id="getAccount" parameterType="SysFenye" resultMap="accAndUserMap">
+	<select id="getAccount" parameterType="SysFenye"
+		resultMap="accAndUserMap">
 		SELECT * FROM `sys_account`
-		<where> 
-		<if test="account.acc_name !=null and account.acc_name!=''">
-		and acc_name=#{account.acc_name}
-		</if>
-		<if test="account.user_code !=null and account.user_code !=''">
-		and user_code =#{account.user_code}
-		</if>
-		<if test="account.acc_state !=null and account.acc_state !=''">
-		and acc_state =#{account.acc_state}
-		</if>
-		<if test="account.acc_code!=null and account.acc_code !=''">
-		and acc_code=#{account.acc_code}
-		</if>
+		<where>
+			<if test="account.acc_name !=null and account.acc_name!=''">
+				and acc_name=#{account.acc_name}
+			</if>
+			<if test="account.user_code !=null and account.user_code !=''">
+				and user_code =#{account.user_code}
+			</if>
+			<if test="account.acc_state !=null and account.acc_state !=''">
+				and acc_state =#{account.acc_state}
+			</if>
+			<if test="account.acc_code!=null and account.acc_code !=''">
+				and acc_code=#{account.acc_code}
+			</if>
 		</where>
 		ORDER BY id DESC
 		limit #{page},#{limit}
 	</select>
-	
-	
-	<!--  根据条件统计账号相关信息 -->
-	<select id="getAccountCount" parameterType="SysFenye" resultType="_int">
+
+
+	<!-- 根据条件统计账号相关信息 -->
+	<select id="getAccountCount" parameterType="SysFenye"
+		resultType="_int">
 		SELECT count(*) FROM `sys_account`
-		<where> 
-		<if test="account.acc_name !=null and account.acc_name!=''">
-		and acc_name=#{account.acc_name}
-		</if>
-		<if test="account.user_code !=null and account.user_code !=''">
-		and user_code =#{account.user_code}
-		</if>
-		<if test="account.acc_state !=null and account.acc_state !=''">
-		and acc_state =#{account.acc_state}
-		</if>
-		<if test="account.acc_code!=null and account.acc_code !=''">
-		and acc_code=#{account.acc_code}
-		</if>
+		<where>
+			<if test="account.acc_name !=null and account.acc_name!=''">
+				and acc_name=#{account.acc_name}
+			</if>
+			<if test="account.user_code !=null and account.user_code !=''">
+				and user_code =#{account.user_code}
+			</if>
+			<if test="account.acc_state !=null and account.acc_state !=''">
+				and acc_state =#{account.acc_state}
+			</if>
+			<if test="account.acc_code!=null and account.acc_code !=''">
+				and acc_code=#{account.acc_code}
+			</if>
 		</where>
 	</select>
 	<!-- 更新账号信息 -->
 	<update id="updateAccount" parameterType="Account">
-		update sys_account  
+		update sys_account
 		<set>
 			<if test="acc_state !=null and acc_state !=''">
-			acc_state =#{acc_state},
+				acc_state =#{acc_state},
 			</if>
 			<if test="acc_password !=null and acc_password !=''">
-			acc_password =#{acc_password},
+				acc_password =#{acc_password},
 			</if>
 		</set>
 		<where>
-		<if test="acc_code !=null and acc_code !=''">
-		and acc_code =#{acc_code}
-		</if>
+			<if test="acc_code !=null and acc_code !=''">
+				and acc_code =#{acc_code}
+			</if>
 		</where>
-		
+
 	</update>
-	
+
 	<!-- 根据acc_code查询账号详情 -->
-	<select id="getAccountInfo" parameterType="String" resultMap="accAndUserMap">
-	SELECT * FROM `sys_account` where acc_code =#{acc_code}
+	<select id="getAccountInfo" parameterType="String"
+		resultMap="accAndUserMap">
+		SELECT * FROM `sys_account` where acc_code =#{acc_code}
 	</select>
+	<!-- 根据账号acc_code查取账号信息 -->
+	<select id="findByAcc_code" parameterType="String"
+		resultType="Account">
+		SELECT * FROM `sys_account` where acc_code =#{acc_code}
+	</select>
+	<!-- 根据账号acc_code删除账号信息 -->
+	<delete id="delByAcc_code" parameterType="String">
+		delete from `sys_account` where acc_code =#{acc_code}
+	</delete>
 </mapper>

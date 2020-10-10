@@ -51,75 +51,42 @@
 </script>
 
 
-	<!-- 详情 -->
-	<div id="look" hidden="hidden">
-		<table v-for="(item,index) in AList" spacing="5">
-			<tr>
-				<td>名称</td>
-				<td>{{item.user.user_name}}</td>
-				<td rowspan="3" colspan="2"><img :src="item.user.user_img"
-					alt="图片类别首图连接" class="img-thumbnail" width="50px" height="50px" />
-				</td>
-			</tr>
-			<tr>
-				<td>账号</td>
-				<td>{{item.acc_name}}</td>
-			</tr>
-			<tr>
-				<td>使用状态</td>
-				<td v-if="item.acc_state =='2'">已被停用</td>
-				<td v-if="item.acc_state == '1'">正在使用</td>
-			</tr>
-		</table>
 
-	</div>
 
 
 </body>
 <script type="text/javascript">
 	function look(acc_code) {
-		var app = new Vue({
-			el : "#look",
-			data : {
-				AList : []
-			},
-			mounted : function() {
-				this.getAccountInfo();
-			},
-			methods : {
-				getAccountInfo : function() {
-					this.$forceUpdate();
-					var that = this;
-					layer.open({
-						type : 1,
-						offset : '100px',
-						area : [ '610px', '600px' ],
-						content : $("#look"),
-						btn : [ "提交", "关闭" ],
-						yes : function() {
-
-						},
-						btn2 : function() {
-							close();
-						}/* ,
-						success : function(layero, index) {
-							//重新渲染
-							$.post("/SH/auth/getAccountInfo", {
-								acc_code : acc_code
-							}, function(res) {
-								that.AList = res;
-
-							})
-
-						} */
-					});
-
-				}
-			}
-		})
+		layer.open({
+			offset : '100px',
+			area : [ '500px', '500px' ],
+			type : 2,
+			content : [ '/SH/system/accountInfo?acc_code=' + acc_code, 'no' ]
+		});
 
 	}
-
+	function del(acc_code) {
+		var table = layui.table;
+		layer.msg("确认删除？", {
+			time : 3000, //5s后自动关闭
+			offset : '30%',
+			btn : [ "删除", "取消" ],
+			area : [ '200px', '100px' ],
+			yes : function() {
+				$.post("/SH/auth/delByAcc_code", {
+					acc_code : acc_code
+				}, function(res) {
+					if (res > 0) {
+						layer.msg("删除成功")
+						table.reload("usertab");
+					} else {
+						table.reload("usertab");
+						layer.msg("删除失败");
+					}
+				}, "json")
+			}
+		});
+	}
 	$(function() {
 		init();
 	});
@@ -146,7 +113,7 @@
 													"#searchacc_state").val())
 										},
 
-										id : "protab",
+										id : "usertab",
 										method : "post",
 										loading : true,
 										page : true,
@@ -190,7 +157,7 @@
 														return "<div><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='look("
 																+ d.acc_code
 																+ ")' >查看</a><a class='layui-btn layui-btn-radius layui-btn-normal'onclick='del("
-																+ d.id
+																+ d.acc_code
 																+ ")' >删除</a> </div>"
 													}
 												} ] ],

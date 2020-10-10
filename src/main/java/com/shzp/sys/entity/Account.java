@@ -23,6 +23,7 @@ private String lasttime;
 private String acc_state;
 private String acc_end;
 private String acc_start;
+private String acc_show;
 
 private User user;
 
@@ -32,7 +33,7 @@ public Account() {
 }
 
 public Account(Integer id, String acc_code, String acc_name, String acc_password, String user_code, String lasttime,
-		String acc_state, String acc_end, String acc_start, User user) {
+		String acc_state, String acc_end, String acc_start, String acc_show, User user) {
 	super();
 	this.id = id;
 	this.acc_code = acc_code;
@@ -43,7 +44,16 @@ public Account(Integer id, String acc_code, String acc_name, String acc_password
 	this.acc_state = acc_state;
 	this.acc_end = acc_end;
 	this.acc_start = acc_start;
+	this.acc_show = acc_show;
 	this.user = user;
+}
+
+public String getAcc_show() {
+	return acc_show;
+}
+
+public void setAcc_show(String acc_show) {
+	this.acc_show = acc_show;
 }
 
 public Integer getId() {
@@ -134,7 +144,7 @@ public static long getSerialversionuid() {
 public String toString() {
 	return "Account [id=" + id + ", acc_code=" + acc_code + ", acc_name=" + acc_name + ", acc_password=" + acc_password
 			+ ", user_code=" + user_code + ", lasttime=" + lasttime + ", acc_state=" + acc_state + ", acc_end="
-			+ acc_end + ", acc_start=" + acc_start + ", user=" + user + "]";
+			+ acc_end + ", acc_start=" + acc_start + ", acc_show=" + acc_show + ", user=" + user + "]";
 }
 
 

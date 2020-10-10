@@ -9,58 +9,38 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MD5Plus {
-
-	public static String generate(String password) {
-		Random r = new Random();
-		StringBuilder sb = new StringBuilder(16);
-		sb.append(r.nextInt(99999999)).append(r.nextInt(99999999));
-		int len = sb.length();
-		if (len < 16) {
-			for (int i = 0; i < 16 - len; i++) {
-				sb.append("0");
-			}
-		}
-		String salt = sb.toString();
-		password = md5Hex(password + salt);
-		char[] cs = new char[48];
-		for (int i = 0; i < 48; i += 3) {
-			cs[i] = password.charAt(i / 3 * 2);
-			char c = salt.charAt(i / 3);
-			cs[i + 1] = c;
-			cs[i + 2] = password.charAt(i / 3 * 2 + 1);
-		}
-		return new String(cs);
-	}
-
-	/**
-	 * 获取十六进制字符串形式的MD5摘要
-	 */
-	private static String md5Hex(String src) {
+	private static String encryption(String password) {
+		// 需要加密的字符串
+		StringBuffer sb = new StringBuffer();
 		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
-			byte[] bs = md5.digest(src.getBytes());
-			return new String(new Hex().encode(bs));
-		} catch (Exception e) {
-			return null;
+			// 加密对象，指定加密方式
+			MessageDigest md5 = MessageDigest.getInstance("md5");
+			// 准备要加密的数据
+			byte[] b = password.getBytes();
+			// 加密
+			byte[] digest = md5.digest(b);
+			// 十六进制的字符
+			char[] chars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+					'F' };
+
+			// 处理成十六进制的字符串(通常)
+			for (byte bb : digest) {
+				sb.append(chars[(bb >> 4) & 15]);
+				sb.append(chars[bb & 15]);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
 		}
+
+		String pwd = sb.toString();
+
+		return pwd;
 	}
-
-	public static boolean verify(String password, String md5) {
-		char[] cs1 = new char[32];
-		char[] cs2 = new char[16];
-		for (int i = 0; i < 48; i += 3) {
-			cs1[i / 3 * 2] = md5.charAt(i);
-			cs1[i / 3 * 2 + 1] = md5.charAt(i + 2);
-			cs2[i / 3] = md5.charAt(i + 1);
-		}
-		String salt = new String(cs2);
-		return md5Hex(password + salt).equals(new String(cs1));
-	}
-
-	/*
-	 * public static void main(String[] args) { String ss = generate("123456");
-	 * System.out.println(generate("123456")); System.out.println("是否是同一字符串：" +
-	 * verify("1213456", ss)); }
-	 */
-
+	
+	public static String getPsw(String usr,String psw) {
+		String encryption = encryption(psw+usr);
+		String password = encryption(encryption);
+		return password;
+		
+	};
 }

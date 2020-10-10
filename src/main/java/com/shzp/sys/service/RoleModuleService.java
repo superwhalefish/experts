@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface RoleModuleService {
 
-	List<String> findModuleCodeByRoleCode(List<String> roles);
+	public List<String> findModuleCodeByRoleCode(List<String> roles);
 
 }

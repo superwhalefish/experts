@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="../js/jquery-easyui-1.9.7/jquery.min.js"></script>
+<script type="text/javascript" src="../js/vue/vue.js"></script>
+</head>
+<body>
+	<!-- 详情 -->
+	<div id="look">
+		<table v-for="(item,index) in AList" spacing="5">
+			<tr>
+				<td>名称</td>
+				<td>{{item.user.user_name}}</td>
+				<td rowspan="3" colspan="2"><img :src="item.user.user_img"
+					alt="图片类别首图连接" class="img-thumbnail" width="50px" height="50px" />
+				</td>
+			</tr>
+			<tr>
+				<td>账号</td>
+				<td>{{item.acc_name}}</td>
+			</tr>
+			<tr>
+				<td>使用状态</td>
+				<td v-if="item.acc_state =='2'">已被停用</td>
+				<td v-if="item.acc_state == '1'">正在使用</td>
+			</tr>
+		</table>
+
+	</div>
+	<script th:inline="javascript">
+	var acc_code = [[${acc_code}]];
+	var app = new Vue({
+		el : "#look",
+		data : {
+			AList : []
+		},
+		mounted : function() {
+			this.getAccountInfo();
+		},
+		methods : {
+			getAccountInfo : function() {
+				var that = this;
+			$.post("/SH/auth/getAccountInfo",{
+				acc_code:acc_code
+			},function(res){
+				that.AList=res
+			})
+
+			}
+		}
+	})
+	</script>
+</body>
+</html>

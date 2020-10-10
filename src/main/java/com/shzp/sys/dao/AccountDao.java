@@ -12,7 +12,7 @@ public interface AccountDao {
 	 * @param acc_name 账号
 	 * @return 账号信息
 	 */
-	Account findByAcc_name(String acc_name);
+	public Account findByAcc_name(String acc_name);
 
 	/**
 	 * 多条件查询账号信息
@@ -20,7 +20,7 @@ public interface AccountDao {
 	 * @param account
 	 * @return
 	 */
-	List<Account> getAccount(SysFenye sysFenye);
+	public List<Account> getAccount(SysFenye sysFenye);
 
 	/**
 	 * 统计账号信息
@@ -28,7 +28,7 @@ public interface AccountDao {
 	 * @param account
 	 * @return
 	 */
-	Integer getAccountCount(SysFenye sysFenye);
+	public Integer getAccountCount(SysFenye sysFenye);
 
 	/**
 	 * 修改账号信息
@@ -36,7 +36,7 @@ public interface AccountDao {
 	 * @param account
 	 * @return
 	 */
-	Integer updateAccount(Account account);
+	public Integer updateAccount(Account account);
 
 	/**
 	 * 根据acc_code查询账号信息
@@ -44,6 +44,21 @@ public interface AccountDao {
 	 * @param acc_code
 	 * @return
 	 */
-	List<Account> getAccountInfo(String acc_code);
+	public List<Account> getAccountInfo(String acc_code);
+
+	/**
+	 * 根据账号删除相关信息
+	 * 
+	 * @param acc_code
+	 * @return
+	 */
+	public Integer delByAcc_code(String acc_code);
+
+	/**
+	 * 根据账号acc_code查取账号信息
+	 * @param acc_code
+	 * @return
+	 */
+	public Account findByAcc_code(String acc_code);
 
 }

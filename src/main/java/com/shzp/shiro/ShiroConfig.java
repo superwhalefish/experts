@@ -38,7 +38,7 @@ public class ShiroConfig {
 		 */
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
 		// 放行页面
-		// filterMap.put("/student/index", "anon");
+		 filterMap.put("/system/accountInfo", "anon");
 		// 授权过滤器
 		filterMap.put("/menu", "authc");
 		List<Module> module = moduleDao.findModuleAll();

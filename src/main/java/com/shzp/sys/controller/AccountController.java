@@ -34,25 +34,8 @@ public class AccountController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public String submitLogin(String usr, String psw, Model model) {
-		// 获取
-		Subject subject = SecurityUtils.getSubject();
-		// 封装
-		UsernamePasswordToken token = new UsernamePasswordToken(usr, psw);
-		try {
-			subject.login(token);
-			// 重定向请求 return "redirect:/toLogin";
-			// 登陆成功
-			return "SUCCESS";
-		} catch (UnknownAccountException e) {
-			// 用户名不存在
-			System.out.println("用户名不存在");
-			return "NOUSR";
-		} catch (IncorrectCredentialsException e) {
-			// 密码错误
-			System.out.println("密码错误");
-			return "PEWERROR";
-		}
+	public String login(String usr, String psw) {
+		return accountService.login(usr,psw);
 	}
 
 	/**
@@ -109,4 +92,10 @@ public class AccountController {
 		return accountService.getAccountInfo(acc_code);
 	}
 
+	@RequestMapping(value = "/delByAcc_code", method = RequestMethod.POST)
+	@ResponseBody
+	public Integer delByAcc_code(String acc_code) {
+		return accountService.delByAcc_code(acc_code);
+
+	}
 }

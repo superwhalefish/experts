@@ -6,5 +6,5 @@ import com.shzp.sys.entity.Module;
 
 public interface ModuleDao {
 
-	List<Module> findModuleAll();
+	public List<Module> findModuleAll();
 }

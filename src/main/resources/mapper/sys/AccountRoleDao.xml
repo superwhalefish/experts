@@ -4,4 +4,8 @@
 <select id="findRoleByAcc_code" parameterType="String" resultType="String">
 SELECT role_code FROM `sys_account_role` where acc_code =#{acc_code}
 </select>
+
+<delete id="delRole_codeByAcc_code" parameterType="String">
+delete from `sys_account_role` where acc_code =#{acc_code}
+</delete>
 </mapper>
