@@ -13,12 +13,6 @@ spring:
         500MB
       max-request-size:
         500MB
-#   freemarker模板引擎配置        
-#  freemarker:
-#    cache: true
-#    charset: UTF-8
-#    suffix: .html
-#    content-type: text/html
   thymeleaf:
     cache: false
     mode: HTML5
