@@ -105,11 +105,11 @@
 			layer.msg("确认退出？", {
 				time : 3000, //5s后自动关闭
 				offset : '30%',
-				btn : [ "删除", "取消" ],
+				btn : [ "确认", "取消" ],
 				area : [ '200px', '100px' ],
 				yes : function() {
 					$.get("/SH/auth/logout",function(res){
-						alert("一推出")
+						window.location.reload(); 
 					})
 				}
 			});

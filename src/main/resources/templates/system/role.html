@@ -15,39 +15,52 @@
 </style>
 <body>
 	<table id="roletab" lay-filter="test"></table>
+
+	<script type="text/html" id="roletoolbar">
+<form class="layui-form" id="searchinit"  lay-filter="selFilter">
+		角色名称：
+		<div class="layui-input-inline">
+			<input type="text" id="role" value="" lay-verify="required|number" autocomplete="off" class="layui-input">
+		</div>
+		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索</a>
+</form>
+</script>
+
+
+
 </body>
 <script type="text/javascript">
-	function look(acc_code) {
-		layer.open({
-			offset : '100px',
-			area : [ '500px', '500px' ],
-			type : 2,
-			content : [ '/SH/system/accountInfo?acc_code=' + acc_code, 'no' ]
-		});
+	/* 	function look(acc_code) {
+	 layer.open({
+	 offset : '100px',
+	 area : [ '500px', '500px' ],
+	 type : 2,
+	 content : [ '/SH/system/accountInfo?acc_code=' + acc_code, 'no' ]
+	 });
 
-	}
-	function del(acc_code) {
-		var table = layui.table;
-		layer.msg("确认删除？", {
-			time : 3000, //5s后自动关闭
-			offset : '30%',
-			btn : [ "删除", "取消" ],
-			area : [ '200px', '100px' ],
-			yes : function() {
-				$.post("/SH/auth/delByAcc_code", {
-					acc_code : acc_code
-				}, function(res) {
-					if (res > 0) {
-						layer.msg("删除成功")
-						table.reload("usertab");
-					} else {
-						table.reload("usertab");
-						layer.msg("删除失败");
-					}
-				}, "json")
-			}
-		});
-	}
+	 }
+	 function del(acc_code) {
+	 var table = layui.table;
+	 layer.msg("确认删除？", {
+	 time : 3000, //5s后自动关闭
+	 offset : '30%',
+	 btn : [ "删除", "取消" ],
+	 area : [ '200px', '100px' ],
+	 yes : function() {
+	 $.post("/SH/auth/delByAcc_code", {
+	 acc_code : acc_code
+	 }, function(res) {
+	 if (res > 0) {
+	 layer.msg("删除成功")
+	 table.reload("usertab");
+	 } else {
+	 table.reload("usertab");
+	 layer.msg("删除失败");
+	 }
+	 }, "json")
+	 }
+	 });
+	 } */
 	$(function() {
 		init();
 	});
@@ -62,23 +75,18 @@
 							var laydate = layui.laydate;
 							table
 									.render({
-										elem : '#usertab' //指定原始表格元素选择器（推荐id选择器）
+										elem : '#roletab' //指定原始表格元素选择器（推荐id选择器）
 										,
-										toolbar : "#usertoolbar",
+										toolbar : "#roletoolbar",
 										where : {
-											acc_name : $.trim($(
-													"#searchacc_name").val()),
-											user_code : $.trim($(
-													"#searchuser_code").val()),
-											acc_state : $.trim($(
-													"#searchacc_state").val())
+											role : $.trim($("#role").val())
 										},
 
-										id : "usertab",
+										id : "roletab",
 										method : "post",
 										loading : true,
 										page : true,
-										url : "/SH/auth/getAccount",
+										url : "/SH/role/getRole",
 										height : 'full-100',
 										cols : [ [
 												{

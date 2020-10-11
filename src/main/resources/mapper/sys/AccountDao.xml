@@ -77,6 +77,15 @@
 			<if test="acc_password !=null and acc_password !=''">
 				acc_password =#{acc_password},
 			</if>
+			<if test="lasttime !=null and lasttime !=''">
+				lasttime =#{lasttime},
+			</if>
+			<if test="acc_start !=null and acc_start !=''">
+			acc_start =#{acc_start},
+			</if>
+			<if test="acc_end !=null and acc_end !=''">
+			acc_end =#{acc_end},
+			</if>
 		</set>
 		<where>
 			<if test="acc_code !=null and acc_code !=''">

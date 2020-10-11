@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -23,6 +25,7 @@ import com.shzp.sys.service.AccountService;
 import com.shzp.sys.service.RoleModuleService;
 import com.shzp.sys.service.UserService;
 import com.shzp.utils.MD5Plus;
+import com.shzp.utils.RandomUtils;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -34,6 +37,8 @@ public class AccountServiceImpl implements AccountService {
 	private UserService userService;
 	@Autowired
 	private AccountRoleService accountRoleService;
+	@Autowired
+	private RandomUtils randomUtils;
 
 	@Override
 	public Account findByAcc_name(String acc_name) {
@@ -88,21 +93,27 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
+	@Transactional
 	public String login(String usr, String psw) {
 		// 获取
-				Subject subject = SecurityUtils.getSubject();
-				// 封装
-				UsernamePasswordToken token = new UsernamePasswordToken(usr, MD5Plus.getPsw(usr, psw));
-				try {
-					subject.login(token);
-					return "SUCCESS";
-				} catch (UnknownAccountException e) {
-					return "NOUSR";
-				} catch (IncorrectCredentialsException e) {
-					return "PEWERROR";
-				}catch (LockedAccountException e) {
-					return "LOCK";
-				}
+		Subject subject = SecurityUtils.getSubject();
+		// 封装
+		UsernamePasswordToken token = new UsernamePasswordToken(usr, MD5Plus.getPsw(usr, psw));
+		try {
+			Account account = new Account();
+			Account acc = accountDao.findByAcc_name(usr);
+			account.setAcc_code(acc.getAcc_code());
+			account.setLasttime(randomUtils.getTimeString());
+			accountDao.updateAccount(account); 
+			subject.login(token);
+			return "SUCCESS";
+		} catch (UnknownAccountException e) {
+			return "NOUSR";
+		} catch (IncorrectCredentialsException e) {
+			return "PEWERROR";
+		} catch (LockedAccountException e) {
+			return "LOCK";
+		}
 	}
 
 }
