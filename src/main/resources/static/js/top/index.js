@@ -1,7 +1,7 @@
 function login() {
 	$.post("/SH/auth/login", {
-		usr : $("#usr").val(),
-		psw : $("#psw").val()
+		usr : $.trim($("#usr").val()),
+		psw : $.trim($("#psw").val())
 	}, function(data) {
 		if ("SUCCESS" == data) {
 			location.href = "menu";

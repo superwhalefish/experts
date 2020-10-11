@@ -18,17 +18,10 @@ public class SysIndexThymeleaf {
 		return "system/accountInfo";
 	}
 	
-	@RequestMapping(value = "/test2",method = RequestMethod.GET)
+	@RequestMapping(value = "/role",method = RequestMethod.GET)
 	public String test2(Model model) {
-		return "system/test2";
+		return "system/role";
 	}
-	@RequestMapping(value = "/test3",method = RequestMethod.GET)
-	public String test3(Model model) {
-		return "system/test3";
-	}
-	@RequestMapping(value = "/test4",method = RequestMethod.GET)
-	public String test4(Model model) {
-		return "system/test4";
-	}
+
 
 }

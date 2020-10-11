@@ -67,7 +67,7 @@ public class UserRealm extends AuthorizingRealm {
 		// 编写shiro认证逻辑，判断用户名和密码
 		// 判断用户名
 		UsernamePasswordToken token = (UsernamePasswordToken) arg0;
-		System.out.println("获取密码"+new String(token.getPassword()));
+		//System.out.println("获取密码"+new String(token.getPassword()));
 		Account user = accountDao.findByAcc_name(token.getUsername());
 		if (user == null) {
 			return null;// shiro底层将抛出UnKnownAccountException异常

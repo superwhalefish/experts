@@ -29,6 +29,7 @@
 		resultMap="accAndUserMap">
 		SELECT * FROM `sys_account`
 		<where>
+			acc_show not in(1)
 			<if test="account.acc_name !=null and account.acc_name!=''">
 				and acc_name=#{account.acc_name}
 			</if>
@@ -97,6 +98,7 @@
 	</select>
 	<!-- 根据账号acc_code删除账号信息 -->
 	<delete id="delByAcc_code" parameterType="String">
-		delete from `sys_account` where acc_code =#{acc_code}
+		delete from
+		`sys_account` where acc_code =#{acc_code}
 	</delete>
 </mapper>

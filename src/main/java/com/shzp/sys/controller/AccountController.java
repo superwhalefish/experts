@@ -49,7 +49,6 @@ public class AccountController {
 	public String logout(HttpSession session, Model model) {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
-		model.addAttribute("msg", "安全退出！");
 		return "index";
 
 	}
