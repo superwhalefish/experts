@@ -25,15 +25,15 @@ public class ProInfoController {
 	@Autowired
 	private ProInfoService proInfoService;
 	@Autowired
-	private proFenye<ProInfo> fenye;
+	private proFenye<ProInfo> profenye;
 	
 	@RequestMapping(value="/info",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selProinfo(int page,int limit,ProInfo proinfo){
-		fenye.setPage((page-1)*limit);
-		fenye.setLimit(limit);
-		fenye.setT(proinfo);
-		return proInfoService.selProInfo(fenye);
+		profenye.setPage((page-1)*limit);
+		profenye.setLimit(limit);
+		profenye.setT(proinfo);
+		return proInfoService.selProInfo(profenye);
 	}
 	
 }

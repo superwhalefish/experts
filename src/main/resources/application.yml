@@ -28,3 +28,5 @@ mybatis:
   type-aliases-package: com.shzp.*.entity
   mapper-locations:
   - classpath:mapper/*/*.xml
+  configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
