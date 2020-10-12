@@ -6,126 +6,338 @@
 <link rel="stylesheet" href="../js/layui/css/layui.css">
 <script type="text/javascript" src="../js/layui/layui.js"></script>
 </head>
+<style type="text/css">
+.layui-table-fixed-r td {
+	height: 58px !important;
+}
+
+.layui-table-fixed-r th {
+	height: 58px !important;
+}
+
+.layui-table img {
+	max-width: 48px;
+	min-height: 48px;
+}
+
+.laytable-cell-3-wx_headimg, .laytable-cell-1-wx_headimg,
+	.laytable-cell-2-wx_headimg, .laytable-cell-3-wx_headimg,
+	.laytable-cell-4-wx_headimg, .laytable-cell-5-wx_headimg,
+	.laytable-cell-6-wx_headimg, .laytable-cell-7-wx_headimg,
+	.laytable-cell-8-wx_headimg, .laytable-cell-9-wx_headimg,
+	.laytable-cell-10-wx_headimg, .laytable-cell-11-wx_headimg,
+	.laytable-cell-12-wx_headimg, .laytable-cell-13-wx_headimg,
+	.laytable-cell-14-wx_headimg {
+	width: 48px !important;;
+	padding: 0px !important;
+	height: 48px !important;;
+	line-height: 48px !important;;
+}
+</style>
 <script type="text/html" id="proInfoToolbar">
-  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" id="detail" >查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-<script type="text/javascript">
-		layui.use(['table','form','laydate','laypage'], function() {
-			var table = layui.table;
-			var form = layui.form;
-			var laydate = layui.laydate;
-			var laypage = layui.laypage; //分页
-			table.render({
-				elem : '#ProInfoTab', //指定原始表格元素选择器（推荐id选择器）
-				method : "post",
-				loading : true,
-				page : true,
-				limit : 10,
-				limits : [ 10, 20, 50 ],
-				url : "/SH/pro/info",
-				height : '600', //容器高度
-				toolbar : 'default',
-				cols : [ [ {
-					field : 'id',
-					title : 'id'
-				}, {
-					field : 'pname',
-					title : '商品'
-				}, {
-					field : 'pweight',
-					title : '价格等级'
-				}, {
-					field : 'pstate',
-					title : '上架状态',
-					templet : function(d) {
-						if (d.pstate == '1') {
-							return '已上架';
-						} else if (d.pstate == '2') {
-							return '未上架';
-						}
-					}
-				}, {
-					field : 'plimit',
-					title : '销售状态',
-					templet : function(d) {
-						if (d.plimit == '1') {
-							return '正常';
-						} else if (d.plimit == '2') {
-							return '停售';
-						} else if (d.plimit == '3') {
-							return '预售';
-						}
-					}
-				}, {
-					field : 'ptypestate',
-					title : '规则',
-					templet : function(d) {
-						if (d.ptypestate == '1') {
-							return '已开启';
-						} else if (d.ptypestate == '2') {
-							return '未开启';
-						}
-					}
-				}, {
-					field : 'proPrice',
-					title : '价格',
-					templet : '<div>{{d.proPrice.plingshou}}</div>'
-				}, {
-					field : 'proSpec',
-					title : '类别',
-					templet : '<div>{{d.proSpec.specname}}</div>'
-				}, {
-					field : 'proBrand',
-					title : '品牌',
-					templet : '<div>{{d.proBrand.bname}}</div>'
-				}, {
-					field : 'proUnit',
-					title : '单位',
-					templet : '<div>{{d.proUnit.unit}}</div>'
-				}, {
-					field : 'proWarehose',
-					title : '仓库地址',
-					templet : '<div>{{d.proWarehose.wname}}</div>'
-				}, {
-					field : 'starttime',
-					title : '上传时间'
-				}, {
-					field : 'upstarttime',
-					title : '修改时间'
-				}, {
-					field : 'poperate',
-					title : '操作记录'
-				}, {
-					field : 'starttime',
-					title : '上传时间'
-				}, {
-					field : 'putawaytime',
-					title : '上架时间'
-				}, {
-					field : 'prosaletime',
-					title : '预售时间'
-				}, {
-					field : 'englishname',
-					title : '商品全拼'
-				}, {
-					field : 'proImg',
-					title : '图片',
-					templet : '<img src={{d.proImg.iurl}}/>'
-				}, {
-					fixed : 'right',
-					title : '操作',
-					width : 165,
-					align : 'center',
-					toolbar : '#proInfoToolbar'
-				} ] ]
-			});
-		})
-</script>
+
 <body>
-	<table id="ProInfoTab" class="layui-hide" lay-filter="test"></table>
+	<div class="prosearch">
+		ID：
+		<div class="layui-inline">
+			<input class="layui-input" name="pcode" id="pcode" autocomplete="off">
+		</div>
+		商品名称：
+		<div class="layui-inline">
+			<input class="layui-input" name="pname" id="pname" autocomplete="off">
+		</div>
+		上传时间：
+		<div class="layui-inline">
+			<input class="layui-input" name="pweight" id="pweight"
+				autocomplete="off">
+		</div>
+		<button class="layui-btn" data-type="reload" id="prosearch">搜索</button>
+	</div>
+	<table id="ProInfoTab" class="layui-hide" lay-filter="ProInfoTab">
+
+	</table>
+	<script type="text/javascript">
+		layui
+				.use(
+						[ 'table', 'layer', 'laydate', 'laypage' ],
+						function() {
+							var table = layui.table;
+							var layer = layui.layer;
+							var laydate = layui.laydate;
+							var laypage = layui.laypage; //分页
+							var $ = layui.$;
+							table
+									.render({
+										elem : '#ProInfoTab', //指定原始表格元素选择器（推荐id选择器）
+										method : "post",
+										loading : true,
+										page : true,
+										limit : 10,
+										limits : [ 10, 20, 50 ],
+										url : "/SH/pro/info",
+										height : '600', //容器高度
+										toolbar : 'default',
+										cols : [ [
+												{
+													field : 'id',
+													title : 'id'
+												},
+												{
+													field : 'pcode',
+													title : '编号'
+												},
+												{
+													field : 'pname',
+													title : '商品'
+												},
+												{
+													field : 'pweight',
+													title : '价格等级'
+												},
+												{
+													field : 'pstate',
+													title : '上架状态',
+													templet : function(d) {
+														if (d.pstate == '1') {
+															return '已上架';
+														} else if (d.pstate == '2') {
+															return '未上架';
+														}
+													},
+													filter : true
+												},
+												{
+													field : 'plimit',
+													title : '销售状态',
+													templet : function(d) {
+														if (d.plimit == '1') {
+															return '正常';
+														} else if (d.plimit == '2') {
+															return '停售';
+														} else if (d.plimit == '3') {
+															return '预售';
+														}
+													},
+													filter : true
+												},
+												{
+													field : 'ptypestate',
+													title : '规则',
+													templet : function(d) {
+														if (d.ptypestate == '1') {
+															return '已开启';
+														} else if (d.ptypestate == '2') {
+															return '未开启';
+														}
+													},
+													filter : true
+												},
+												{
+													field : 'proPrice',
+													title : '价格',
+													templet : '<div>{{d.proPrice.plingshou}}</div>'
+												},
+												{
+													field : 'proSpec',
+													title : '类别',
+													templet : '<div>{{d.proSpec.specname}}</div>'
+												},
+												{
+													field : 'proBrand',
+													title : '品牌',
+													templet : '<div>{{d.proBrand.bname}}</div>'
+												},
+												{
+													field : 'proUnit',
+													title : '单位',
+													templet : '<div>{{d.proUnit.unit}}</div>'
+												},
+												{
+													field : 'proWarehose',
+													title : '仓库地址',
+													templet : '<div>{{d.proWarehose.wname}}</div>'
+												},
+												{
+													field : 'starttime',
+													title : '上传时间'
+												},
+												{
+													field : 'upstarttime',
+													title : '修改时间'
+												},
+												{
+													field : 'poperate',
+													title : '操作记录'
+												},
+												{
+													field : 'starttime',
+													title : '上传时间'
+												},
+												{
+													field : 'putawaytime',
+													title : '上架时间'
+												},
+												{
+													field : 'prosaletime',
+													title : '预售时间'
+												},
+												{
+													field : 'englishname',
+													title : '商品全拼'
+												},
+												{
+													field : 'proImg',
+													title : '图片',
+													templet : '<div><img src="{{d.proImg.iurl}}"/></div>',
+													style : 'height:48px;width:48px;line-height:48px!important;'//页面首先执行!important
+												}, {
+													fixed : 'right',
+													title : '操作',
+													width : 165,
+													align : 'center',
+													toolbar : '#proInfoToolbar'
+												} ] ]
+									});
+							//搜索姓党与init()
+							var active = {
+								reload : function() {
+									var pcode = $('#pcode');
+									var pname = $('#pname');
+									var pweight = $('#pweight');
+									//执行重载
+									table.reload('ProInfoTab', {
+										page : {
+											curr : 1
+										//重新从第 1 页开始
+										},
+										where : {
+											pcode : pcode.val(),//逗号隔开
+											pname : pname.val(),
+											pweight : pweight.val()
+										}
+									}, 'data');
+								}
+							};
+							$('#prosearch').on('click', function() {
+								var type = $(this).data('type');
+								active[type] ? active[type].call(this) : '';
+							});
+							//按钮
+							table.on('tool(ProInfoTab)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+								var data = obj.data; //获得当前行数据
+								//layer.alert('编辑行：<br>'+ JSON.stringify(data))//当前行数据
+								var layEvent = obj.event; //获得 lay-event 对应的值
+								if (layEvent === 'detail') {
+									layer.open({
+										type : 1,
+										title : '查看商品信息',
+										closeBtn : 1,//关闭的样式
+										shadeClose : true,//点击区域外的关闭
+										area : [ '700px', '700px' ],//宽高
+										skin : 'layui-layer-molv',//样式
+										offset : '0px',//弹出层的位置,
+										content : $('#ProLook'),
+										success : function(layero, index) {
+											$('#updPcode').val(data.pcode);
+											$('#updPname').val(data.pname);
+											$('#updPweight').val(data.pweight);
+											$('#updPPrice').val(data.proPrice.plingshou);
+											$('#updPstate').val(data.pstate);
+											$('#updPlimit').val(data.plimit);
+											$('#ptyPestate').val(data.ptypestate);
+											
+											layui.form.render('select');//更新select标签
+											
+										}
+									});
+								} else if (layEvent === 'del') {
+									layer.confirm('真的删除行么', function(index) {
+										obj.del(); //删除对应行（tr）的DOM结构
+										layer.close(index);
+										//向服务端发送删除指令
+									});
+								} else if (layEvent === 'edit') {
+									layer.open({
+										type : 1,
+										title : false,
+										closeBtn : 0,
+										shadeClose : true,
+										skin : 'yourclass',
+										content : '自定义HTML内容'
+									});
+								}
+							});
+						})
+	</script>
+	<div class="site-text" style="margin: 5%; display: none" id="ProLook"
+		target="test123">
+		<form class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">商品编号：</label>
+				<div class="layui-input-inline">
+					<!--autocomplete:是否允许浏览器自动填充，no：1，off:0 -->
+					<input type="text" id="updPcode" autocomplete="off"
+						placeholder="请输入编号" class="layui-input">
+				</div>
+				<label class="layui-form-label">商品名称：</label>
+				<div class="layui-input-inline">	
+					<input type="text" id="updPname" lay-verify="title" autocomplete="off"
+						placeholder="请输入名称" class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">价格等级：</label>
+				<div class="layui-input-inline">
+					<input type="text" id="updPweight" autocomplete="off"
+						 class="layui-input">
+				</div>
+				<label class="layui-form-label">商品价格：</label>
+				<div class="layui-input-inline">	
+					<input type="text" id="updPPrice" lay-verify="title" autocomplete="off"
+						placeholder="请输入名称" class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">上架状态：</label>
+				<div class="layui-input-inline">
+					<select id="updPstate">
+				        <option value="1">已上架</option>
+				        <option value="2">未上架</option>
+				    </select>
+				</div>
+				<label class="layui-form-label">商品价格：</label>
+				<div class="layui-input-inline">	
+					<select id="updPlimit">
+				        <option value="1">正常</option>
+				        <option value="2">停售</option>
+				        <option value="3">预售</option>
+				    </select>
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">价格等级：</label>
+				<div class="layui-input-inline">
+					<select id="ptyPestate">
+				        <option value="1">已开启</option>
+				        <option value="2">未开启</option>
+				    </select>
+				</div>
+				<label class="layui-form-label">商品价格：</label>
+				<div class="layui-input-inline">	
+					<input type="text" id="updPPrice" lay-verify="title" autocomplete="off"
+						placeholder="请输入名称" class="layui-input">
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
 

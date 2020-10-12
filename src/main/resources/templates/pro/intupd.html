@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	//弹出层提交按钮：
+	form.on('submit(changStor_btn)', function(data) {
+		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+		$.ajax({
+			url : '../',
+			type : "",
+			dataType : "json",
+			data : {/**传入后台的修改后的值**/
+			},
+			success : function(data) {
+				if (data.code == 0) {
+					layer.msg('修改成功');
+					parent.layer.close(index); //再执行关闭
+					parent.$(".refresh").click();//通过触发页面局部刷新按钮来刷新父页面更新修改后的表格数据
+				}
+				if (data.code == -1) {
+					layer.msg("登录超时", function() {
+						window.location.href = "../login.html";
+					});
+				}
+				if (data.code == 1) {
+					layer.msg(data.msg);
+				}
+			}
+		});
+		return false;
+	});
+</script>
+<body>
+	asdfasdfasdfasdfasdfasdf
+</body>
+
+</html>
