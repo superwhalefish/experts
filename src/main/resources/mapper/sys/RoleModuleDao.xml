@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shzp.sys.dao.RoleModuleDao">
-<select id="findModuleCodeByRoleCode" parameterType="list" resultType="String">
-SELECT module_code FROM `sys_role_module`  
-<where>
-role_code  in
-<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-#{item}
-</foreach>
-</where>
-</select>
+	<select id="findModuleCodeByRoleCode" parameterType="list"
+		resultType="String">
+		SELECT module_code FROM `sys_role_module`
+		<where>
+			role_code in
+			<foreach collection="list" index="index" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</select>
+	<!-- 根据role_code查询所负责的模块 -->
+	<select id="getModuleCodeByRoleCode" parameterType="String"
+		resultType="String">
+		SELECT module_code FROM `sys_role_module` where
+		role_code=#{role_code}
+	</select>
+	<!-- 赋予权限 -->
+	<insert id="addRoleModule" parameterType="List">
+		insert into sys_role_module(role_code,module_code) VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.role_code},#{item.module_code}
+			)
+		</foreach>
+	</insert>
+	<!-- 权限撤销 -->
+	<delete id="delRoleModule" parameterType="List">
+		delete from sys_role_module
+		<where>
+			 <foreach collection="list" item="item" separator=" or " index="index">
+            (module_code = #{item.module_code} and role_code =#{item.role_code})
+        </foreach>
+			
+		</where>
+	</delete>
+	<!-- 通过role_code删除信息 -->
+	<delete id="delRoleModuleByRolecode" parameterType="String">
+	delete from sys_role_module where role_code =#{role_code}
+	</delete>
 </mapper>

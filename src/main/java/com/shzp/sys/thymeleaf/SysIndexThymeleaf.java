@@ -8,20 +8,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/system")
 public class SysIndexThymeleaf {
-	@RequestMapping(value = "/account",method = RequestMethod.GET)
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String test1(Model model) {
 		return "system/account";
 	}
-	@RequestMapping(value = "/accountInfo",method = RequestMethod.GET)
-	public String accountInfo(Model model,String acc_code) {
+
+	@RequestMapping(value = "/accountInfo", method = RequestMethod.GET)
+	public String accountInfo(Model model, String acc_code) {
 		model.addAttribute("acc_code", acc_code);
 		return "system/accountInfo";
 	}
-	
-	@RequestMapping(value = "/role",method = RequestMethod.GET)
-	public String test2(Model model) {
+
+	@RequestMapping(value = "/role", method = RequestMethod.GET)
+	public String role(Model model) {
 		return "system/role";
 	}
 
+	@RequestMapping(value = "/moduleToRole", method = RequestMethod.GET)
+	public String moduleToRole(Model model, String role_code) {
+		model.addAttribute("role_code", role_code);
+		return "system/roleinfo";
+	}
 
 }

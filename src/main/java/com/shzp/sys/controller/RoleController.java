@@ -29,4 +29,27 @@ public class RoleController {
 		sysFenye.setRole(role);
 		return roleService.getRole(sysFenye);
 	}
+	@RequestMapping(value = "/updateRole",method = RequestMethod.POST)
+	@ResponseBody
+	public Integer updateRole(Role role) {
+		
+		return roleService.updateRole(role);
+		
+	}
+	@RequestMapping(value = "/delRoleByRoleCode",method = RequestMethod.POST)
+	@ResponseBody
+	public Integer delRoleByRoleCode(String role_code) {
+		return roleService.delRoleByRoleCode(role_code);
+		
+	}
+	
+	
+	@RequestMapping(value = "/deleteRoleByRoleCode",method = RequestMethod.POST)
+	@ResponseBody
+	public Integer deleteRoleByRoleCode(String role_code) {
+		return roleService.deleteRoleByRoleCode(role_code);
+		
+	}	
+	
+	
 }

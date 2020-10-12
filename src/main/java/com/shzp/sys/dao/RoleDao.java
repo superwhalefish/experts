@@ -13,14 +13,29 @@ public interface RoleDao {
 	 * @param sysFenye
 	 * @return
 	 */
-	List<Role> getRole(SysFenye sysFenye);
-	
+	public List<Role> getRole(SysFenye sysFenye);
+
 	/**
 	 * 动态获取角色数量信息
 	 * 
 	 * @param sysFenye
 	 * @return
 	 */
-	Integer getRoleCount(SysFenye sysFenye);
+	public Integer getRoleCount(SysFenye sysFenye);
+
+	/**
+	 * 
+	 * @param role
+	 * @return
+	 */
+	public Integer updateRole(Role role);
+
+	/**
+	 * 根据角色编号删除角色
+	 * 
+	 * @param role_code
+	 * @return
+	 */
+	public Integer delRoleByRoleCode(String role_code);
 
 }

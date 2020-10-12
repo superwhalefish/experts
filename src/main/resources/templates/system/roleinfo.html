@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>权限设置</title>
+<link rel="stylesheet" href="../js/layui/css/layui.css">
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript"
+	src="../js/jquery-easyui-1.9.7/jquery.min.js"></script>
+</head>
+<body>
+	<fieldset class="layui-elem-field layui-field-title"
+		style="margin-top: 30px;">
+		<legend>角色权限赋予</legend>
+	</fieldset>
+	<div id="test2" class="demo-transfer"></div>
+</body>
+<script th:inline="javascript">
+
+
+//https://jingyan.baidu.com/article/59a015e3fe9321b695886538.html
+var role_code = [[${role_code}]];
+ $(function(){
+	 init();
+ })
+ function init(){
+	 layui.use(['transfer', 'layer', 'util'], function(){
+		  var $ = layui.$
+		  ,transfer = layui.transfer
+		  ,layer = layui.layer
+		  ,util = layui.util;
+		  $.post("/SH/roleModule/getRoleModule",{
+			  role_code:role_code
+		  },function(data){
+			  transfer.render({
+				    elem: '#test2'
+				    ,title: ['该尚未拥有权限', '该角色所拥有权限']  //自定义标题
+				    ,data: data.moduleAll
+				    ,parseData:function(res){
+				    	return {
+				    		"value": res.module_code
+					    	,"title": res.module
+					    	,"id":res.id
+				    	}
+				    }
+				    ,value:data.role
+				    ,height: 350 //定义高度
+				    ,onchange:function(data,index){
+				    	var str="";
+			    		for(var i=0;i<data.length;i++){
+			    			  str+=","+data[i].value	
+			    		}
+				    	if(index!=1){
+						 
+				    	 	$.post("/SH/roleModule/addRoleModule",{
+				    			role_code:role_code,
+				    			module_codes:str
+				    		},function(res){
+				    			if(res>0){
+				    			    layer.msg("设置成功");	
+				    			}else{
+				    				 layer.msg("服务器繁忙，请稍后重试。。。。。。");	
+				    			}
+				    		}) 
+				    	}else{
+						    layer.msg("这是撤销权限");	
+				    	  	$.post("/SH/roleModule/delRoleModule",{
+				    			role_code:role_code,
+				    			module_codes:str
+				    		},function(res){
+				    			if(res>0){
+					    			    layer.msg("设置成功");	
+				    			}else{
+				    				 layer.msg("服务器繁忙，请稍后重试。。。。。。");	
+				    			}
+				    		})  
+				    	
+				    	}
+				    }
+				  })
+		  },"json")
+	 })
+ }
+
+</script>
+</html>

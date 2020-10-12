@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shzp.sys.dao.AccountRoleDao">
-<select id="findRoleByAcc_code" parameterType="String" resultType="String">
-SELECT role_code FROM `sys_account_role` where acc_code =#{acc_code}
-</select>
-
-<delete id="delRole_codeByAcc_code" parameterType="String">
-delete from `sys_account_role` where acc_code =#{acc_code}
-</delete>
+	<select id="findRoleByAcc_code" parameterType="String"
+		resultType="String">
+		SELECT role_code FROM `sys_account_role` where acc_code
+		=#{acc_code}
+	</select>
+	<!-- 根据用户编号查询角色 -->
+	<delete id="delRole_codeByAcc_code" parameterType="String">
+		delete from
+		`sys_account_role` where acc_code =#{acc_code}
+	</delete>
+	<!-- 判断该角色绑定的账号人数 -->
+	<select id="findRoleByRoleCount" parameterType="String"
+		resultType="_int">
+		SELECT count(*) FROM `sys_account_role` where role_code
+		=#{role_code}
+	</select>
+	<!-- 通过角色编号强制删除 -->
+	<delete id="delAccountRoleByRolecode" parameterType="String">
+		delete from `sys_account_role` where role_code =#{role_code}
+	</delete>
 </mapper>

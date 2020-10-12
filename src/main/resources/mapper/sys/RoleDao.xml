@@ -12,7 +12,8 @@
 		limit #{page},#{limit}
 	</select>
 	<!-- 统计角色信息数量 -->
-	<select id="getRoleCount" parameterType="SysFenye" resultType="_int">
+	<select id="getRoleCount" parameterType="SysFenye"
+		resultType="_int">
 		SELECT count(*) FROM `sys_role`
 		<where>
 			<if test="role.role !=null and role.role !=''">
@@ -20,5 +21,23 @@
 			</if>
 		</where>
 	</select>
+	<!-- 修改信息 -->
+	<update id="updateRole" parameterType="Role">
+		update `sys_role`
+		<set>
+			<if test="role !=null and role !=''">
+				role =#{role},
+			</if>
+		</set>
+		<where>
+			<if test="role_code !=null  and role !='' ">
+				and role_code =#{role_code}
+			</if>
+		</where>
+	</update>
 
+	<!-- 删除角色 -->
+	<delete id="delRoleByRoleCode" parameterType="String">
+		delete from sys_role where role_code =#{role_code}
+	</delete>
 </mapper>

@@ -18,5 +18,17 @@ public interface AccountRoleDao {
 	 * @return
 	 */
 	public Integer delRole_codeByAcc_code(String acc_code);
+	/**
+	 * 判断该角色绑定几个账号
+	 * @param role_code
+	 * @return
+	 */
+	public Integer findRoleByRoleCount(String role_code);
+	/**
+	 * 根据角色编号
+	 * @param role_code
+	 * @return
+	 */
+	public Integer delAccountRoleByRolecode(String role_code);
 
 }

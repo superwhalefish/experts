@@ -23,44 +23,128 @@
 			<input type="text" id="role" value="" lay-verify="required|number" autocomplete="off" class="layui-input">
 		</div>
 		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索</a>
+		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='add()'>添加角色</a>
 </form>
 </script>
 
 
 
 </body>
-<script type="text/javascript">
-	/* 	function look(acc_code) {
-	 layer.open({
-	 offset : '100px',
-	 area : [ '500px', '500px' ],
-	 type : 2,
-	 content : [ '/SH/system/accountInfo?acc_code=' + acc_code, 'no' ]
-	 });
+<div id="edit" hidden="hidden">
+	<form class="layui-form layui-form-pane">
+		<div class="layui-form-item">
+			<label class="layui-form-label">角色名称</label>
+			<div class="layui-input-inline">
+				<input type="text" id="rolename" lay-verify="required"
+					placeholder="请输入新的角色名称" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+	</form>
+</div>
 
-	 }
-	 function del(acc_code) {
-	 var table = layui.table;
-	 layer.msg("确认删除？", {
-	 time : 3000, //5s后自动关闭
-	 offset : '30%',
-	 btn : [ "删除", "取消" ],
-	 area : [ '200px', '100px' ],
-	 yes : function() {
-	 $.post("/SH/auth/delByAcc_code", {
-	 acc_code : acc_code
-	 }, function(res) {
-	 if (res > 0) {
-	 layer.msg("删除成功")
-	 table.reload("usertab");
-	 } else {
-	 table.reload("usertab");
-	 layer.msg("删除失败");
-	 }
-	 }, "json")
-	 }
-	 });
-	 } */
+<script type="text/javascript">
+	function edit(role_code) {
+		var table = layui.table;
+		layer.open({
+			offset : '30%',
+			title : "角色信息修改",
+			type : 1,
+			content : $('#edit'),
+			btn : [ '提交', '关闭' ] //只是为了演示
+			,
+			yes : function() {
+				$.post("/SH/role/updateRole", {
+					role_code : role_code,
+					role : $.trim($("#rolename").val())
+				}, function(res) {
+					if (res > 0) {
+						table.reload("roletab");
+						layer.closeAll();
+						layer.msg('修改成功');
+					} else {
+						table.reload("roletab");
+						layer.msg('服务器繁忙请稍后再试。。。。。');
+					}
+				}, "json")
+			},
+			btn2 : function() {
+				layer.closeAll();
+			}
+		});
+	}
+
+	function shezhi(role_code) {
+		layer
+				.open({
+					offset : '100px',
+					area : [ '500px', '500px' ],
+					type : 2,
+					content : [
+							'/SH/system/moduleToRole?role_code=' + role_code,
+							'no' ]
+				});
+	}
+
+	function del(role_code) {
+		var table = layui.table;
+		layer.msg("确认删除？", {
+			time : 3000, //5s后自动关闭
+			offset : '20%',
+			btn : [ "删除", "取消" ],
+			area : [ '200px', '100px' ],
+			yes : function() {
+				$.post("/SH/role/delRoleByRoleCode", {
+					role_code : role_code
+				}, function(res) {
+					if (res == 1) {
+						layer.msg("删除成功")
+						table.reload("roletab");
+					} else if (res == 20) {
+						layer.msg("该角色还有绑定账号,是否强制解除所有绑定？", {
+							time : 8000, //8s后自动关闭
+							offset : '20%',
+							type : 2,
+							btn : [ "删除", "取消" ],
+							area : [ '400px', '100px' ],
+							yes : function() {
+								$.post("/SH/role/deleteRoleByRoleCode", {
+									role_code : role_code
+								}, function(res) {
+									if (res > 0) {
+										table.reload("roletab");
+										layer.msg("已删除");
+									} else {
+										table.reload("roletab");
+										layer.msg("服务器繁忙，请稍后重试。。。");
+									}
+								})
+							}
+						})
+					} else {
+						layer.msg("该角色还有绑定权限,是否强制解除所有绑定？", {
+							time : 8000, //8s后自动关闭
+							offset : '20%',
+							btn : [ "删除", "取消" ],
+							area : [ '400px', '100px' ],
+							yes : function() {
+								$.post("/SH/role/deleteRoleByRoleCode", {
+									role_code : role_code
+								}, function(res) {
+									if (res > 0) {
+										table.reload("roletab");
+										layer.msg("已删除");
+									} else {
+										table.reload("roletab");
+										layer.msg("服务器繁忙，请稍后重试。。。");
+									}
+								})
+							}
+						})
+					}
+				}, "json")
+			}
+		});
+	}
 	$(function() {
 		init();
 	});
