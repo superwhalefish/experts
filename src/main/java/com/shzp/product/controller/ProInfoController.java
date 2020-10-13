@@ -30,6 +30,7 @@ public class ProInfoController {
 	@RequestMapping(value="/info",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selProinfo(int page,int limit,ProInfo proinfo){
+		System.out.println("-----------123131312321321------------"+proinfo);
 		profenye.setPage((page-1)*limit);
 		profenye.setLimit(limit);
 		profenye.setT(proinfo);
