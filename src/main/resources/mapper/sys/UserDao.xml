@@ -46,4 +46,24 @@
 			</if>
 		</where>
 	</update>
+	<!-- 动态查询员工信息 -->
+	<select id="getUser" parameterType="SysFenye" resultType="User">
+		SELECT * FROM `usr_user`
+		<where>
+			<if test="user.user_name !=null and user.user_name !=''">
+			and user_name =#{user.user_name}
+			</if>
+		</where>
+		limit #{page},#{limit}
+	</select>
+	<!-- 统计动态查询员工信息 -->
+	<select id="getUserCount" parameterType="SysFenye" resultType="_int">
+	SELECT count(*) FROM `usr_user`
+		<where>
+			<if test="user.user_name !=null and user.user_name !=''">
+			and user_name =#{user.user_name}
+			</if>
+		</where>
+	</select>
+	
 </mapper>

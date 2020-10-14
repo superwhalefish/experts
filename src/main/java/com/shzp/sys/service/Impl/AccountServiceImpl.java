@@ -52,7 +52,6 @@ public class AccountServiceImpl implements AccountService {
 		if (sysFenye.getAccount().getUser_code().length() > 0) {
 			User user = userDao.findUserByUser_name(sysFenye.getAccount().getUser_code());
 			sysFenye.getAccount().setUser_code(user.getUser_code());
-			;
 		}
 		List<Account> account = accountDao.getAccount(sysFenye);
 		Integer accountCount = accountDao.getAccountCount(sysFenye);
@@ -67,6 +66,9 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Integer updateAccount(Account account) {
 		// TODO Auto-generated method stub
+		if(!"1".equals(account.getAcc_state())) {
+			account.setAcc_end(randomUtils.getTimeString());
+		}
 		return accountDao.updateAccount(account);
 	}
 
@@ -89,6 +91,8 @@ public class AccountServiceImpl implements AccountService {
 			userService.updateUserByUserCode(user);
 			accountRoleService.delRole_codeByAcc_code(acc_code);
 		}
+		accountRoleService.delRole_codeByAcc_code(acc_code);
+		
 		return delByAcc_code;
 	}
 

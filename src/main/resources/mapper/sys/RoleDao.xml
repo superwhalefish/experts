@@ -42,6 +42,11 @@
 	</delete>
 	<!-- 添加角色 -->
 	<insert id="addRole" parameterType="Role">
-		insert into sys_role(role,role_code) VALUE(#{role},#{role_code})
+		insert into
+		sys_role(role,role_code) VALUE(#{role},#{role_code})
 	</insert>
+	<!-- 查询所有权限 -->
+	<select id="getRoleAll" resultType="Role">
+		SELECT * FROM `sys_role`
+	</select>
 </mapper>

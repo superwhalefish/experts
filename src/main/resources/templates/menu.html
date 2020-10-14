@@ -67,6 +67,25 @@
 							</dd>
 						</dl>
 					</li>
+					<li class="layui-nav-item">
+						<!--  layui-nav-itemed 导航栏是否打开 --> <a class="" href="javascript:;">用户管理</a>
+						<dl class="layui-nav-child">
+							<dd shiro:hasPermission="111111116">
+								<a data-url="usr/user" data-id="1" data-title="员工信息管理"
+									href="javascript:;" data-type="tabAdd">员工信息管理</a>
+							</dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<!--  layui-nav-itemed 导航栏是否打开 --> <a class="" href="javascript:;">订单管理</a>
+						<dl class="layui-nav-child">
+							<dd shiro:hasPermission="111111117">
+								<a data-url="ord/order" data-id="1" data-title="订单信息管理"
+									href="javascript:;" data-type="tabAdd">订单信息管理</a>
+							</dd>
+						</dl>
+					</li>
+					
 					<li class="layui-nav-item ">
 						<!-- layui-nav-itemed 打开状态 --> <a class="" href="javascript:;">商品管理</a>
 						<dl class="layui-nav-child">

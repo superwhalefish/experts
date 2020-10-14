@@ -29,5 +29,10 @@ public class SysIndexThymeleaf {
 		model.addAttribute("role_code", role_code);
 		return "system/roleinfo";
 	}
+	@RequestMapping(value = "/roleToAcc", method = RequestMethod.GET)
+	public String roleToAcc(Model model, String acc_code) {
+		model.addAttribute("acc_code", acc_code);
+		return "system/roletoacc";
+	}
 
 }

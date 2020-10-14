@@ -19,6 +19,34 @@
 	</select>
 	<!-- 通过角色编号强制删除 -->
 	<delete id="delAccountRoleByRolecode" parameterType="String">
-		delete from `sys_account_role` where role_code =#{role_code}
+		delete from
+		`sys_account_role` where role_code =#{role_code}
+	</delete>
+	<!-- 根据acc_code查询role_code -->
+	<select id="findRoleCodeByAcc_code" parameterType="String"
+		resultType="String">
+		select role_code from sys_account_role where acc_code
+		=#{acc_code}
+	</select>
+	<!-- 赋予账号权限 -->
+	<insert id="addAccountRole" parameterType="List">
+		insert into sys_account_role (acc_code,role_code) VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.acc_code},#{item.role_code}
+			)
+		</foreach>
+	</insert>
+
+	<!-- 撤销账号权限 -->
+	<delete id="delAccountRoler" parameterType="List">
+		delete from sys_account_role
+		<where>
+			<foreach collection="list" item="item" separator=" or "
+				index="index">
+				(acc_code = #{item.acc_code} and role_code =#{item.role_code})
+			</foreach>
+		</where>
 	</delete>
 </mapper>

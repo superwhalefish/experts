@@ -52,6 +52,17 @@
 
 </body>
 <script type="text/javascript">
+
+function shezhi(acc_code){
+	layer.open({
+		offset : '100px',
+		area : [ '650px', '600px' ],
+		type : 2,
+		content : [ '/SH/system/roleToAcc?acc_code=' + acc_code, 'no' ]
+	});
+	
+}
+
 	function look(acc_code) {
 		layer.open({
 			offset : '100px',

@@ -46,4 +46,11 @@ public interface RoleDao {
 	 */
 	public Integer addRole(Role role);
 
+	/**
+	 * 查询所有角色
+	 * 
+	 * @return
+	 */
+	public List<Role> getRoleAll();
+
 }
