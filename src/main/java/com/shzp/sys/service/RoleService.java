@@ -38,4 +38,12 @@ public interface RoleService {
 	 */
 	Integer deleteRoleByRoleCode(String role_code);
 
+	/**
+	 * 添加角色
+	 * 
+	 * @param role
+	 * @return
+	 */
+	Integer addRole(String role);
+
 }

@@ -18,8 +18,8 @@
 			<if test="user_name !=null and user_name !=''">
 				user_name =#{user_name},
 			</if>
-			<if test="position_code !=null and position_code !=''">
-				position_code =#{position_code},
+			<if test="user_position !=null and user_position !=''">
+				user_position =#{user_position},
 			</if>
 			<if test="user_tel !=null and user_tel !=''">
 				user_tel =#{user_tel},

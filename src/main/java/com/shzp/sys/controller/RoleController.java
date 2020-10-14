@@ -51,5 +51,12 @@ public class RoleController {
 		
 	}	
 	
+	@RequestMapping(value = "/addRole",method = RequestMethod.POST)
+	@ResponseBody
+	public Integer addRole(String role) {
+		
+		return roleService.addRole(role);
+		
+	}
 	
 }

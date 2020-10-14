@@ -38,4 +38,12 @@ public interface RoleDao {
 	 */
 	public Integer delRoleByRoleCode(String role_code);
 
+	/**
+	 * 添加角色
+	 * 
+	 * @param role2
+	 * @return
+	 */
+	public Integer addRole(Role role);
+
 }

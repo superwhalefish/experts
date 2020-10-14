@@ -35,9 +35,13 @@
 			</if>
 		</where>
 	</update>
-
 	<!-- 删除角色 -->
 	<delete id="delRoleByRoleCode" parameterType="String">
-		delete from sys_role where role_code =#{role_code}
+		delete from
+		sys_role where role_code =#{role_code}
 	</delete>
+	<!-- 添加角色 -->
+	<insert id="addRole" parameterType="Role">
+		insert into sys_role(role,role_code) VALUE(#{role},#{role_code})
+	</insert>
 </mapper>

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class RandomUtils {
 	public String getTimeRand() {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSS");
 		String format = sdf.format(date);
 		return format;
 	}

@@ -18,6 +18,7 @@ import com.shzp.sys.entity.SysFenye;
 import com.shzp.sys.service.AccountService;
 import com.shzp.sys.service.RoleModuleService;
 import com.shzp.sys.service.RoleService;
+import com.shzp.utils.RandomUtils;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -74,6 +75,18 @@ public class RoleServiceImpl implements RoleService {
 		if (ar > 0 && rm > 0) {
 			r = roleDao.delRoleByRoleCode(role_code);
 		}
+		return r;
+	}
+
+	@Override
+	public Integer addRole(String role) {
+		// TODO Auto-generated method stub
+		RandomUtils randomUtils = new RandomUtils();
+		Role role2 = new Role();
+		String timeRand = randomUtils.getTimeRand();
+		role2.setRole(role);
+		role2.setRole_code(timeRand);
+		Integer r= roleDao.addRole(role2);
 		return r;
 	}
 
