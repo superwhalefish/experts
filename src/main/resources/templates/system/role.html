@@ -60,6 +60,7 @@
 			offset : '30%',
 			title : "角色信息修改",
 			type : 1,
+			shadeClose : true,
 			content : $('#add'),
 			btn : [ '提交', '关闭' ] //只是为了演示
 			,
@@ -89,6 +90,7 @@
 			offset : '30%',
 			title : "角色信息修改",
 			type : 1,
+			shadeClose : true,
 			content : $('#edit'),
 			btn : [ '提交', '关闭' ] //只是为了演示
 			,
@@ -117,6 +119,7 @@
 		layer
 				.open({
 					offset : '100px',
+					shadeClose : true,
 					area : [ '500px', '500px' ],
 					type : 2,
 					content : [
@@ -130,6 +133,7 @@
 		layer.msg("确认删除？", {
 			time : 3000, //5s后自动关闭
 			offset : '20%',
+			shadeClose : true,
 			btn : [ "删除", "取消" ],
 			area : [ '200px', '100px' ],
 			yes : function() {
@@ -144,6 +148,7 @@
 							time : 8000, //8s后自动关闭
 							offset : '20%',
 							type : 2,
+							shadeClose : true,
 							btn : [ "删除", "取消" ],
 							area : [ '400px', '100px' ],
 							yes : function() {
@@ -164,6 +169,7 @@
 						layer.msg("该角色还有绑定权限,是否强制解除所有绑定？", {
 							time : 8000, //8s后自动关闭
 							offset : '20%',
+							shadeClose : true,
 							btn : [ "删除", "取消" ],
 							area : [ '400px', '100px' ],
 							yes : function() {

@@ -50,20 +50,44 @@
 	<select id="getUser" parameterType="SysFenye" resultType="User">
 		SELECT * FROM `usr_user`
 		<where>
+			user_accountstate not in (1)
 			<if test="user.user_name !=null and user.user_name !=''">
-			and user_name =#{user.user_name}
+				and user_name like "%" #{user.user_name}"%"
+			</if>
+			<if test="user.user_position !=null and user.user_position !=''">
+				and user_position =#{user.user_position}
+			</if>
+			<if test="user.user_tel !=null and user.user_tel !=''">
+				and user_tel like "%"#{user.user_tel} "%"
+			</if>
+			<if test="user.user_english !=null and user.user_english !=''">
+				or user_english like "%"#{user.user_english}"%"
 			</if>
 		</where>
 		limit #{page},#{limit}
 	</select>
 	<!-- 统计动态查询员工信息 -->
-	<select id="getUserCount" parameterType="SysFenye" resultType="_int">
-	SELECT count(*) FROM `usr_user`
+	<select id="getUserCount" parameterType="SysFenye"
+		resultType="_int">
+		SELECT count(*) FROM `usr_user`
 		<where>
+			user_accountstate not in (1)
 			<if test="user.user_name !=null and user.user_name !=''">
-			and user_name =#{user.user_name}
+				and user_name like "%" #{user.user_name}"%"
+			</if>
+			<if test="user.user_position!=null and user.user_position !=''">
+				and user_position =#{user.user_position}
+			</if>
+			<if test="user.user_tel !=null and user.user_tel !=''">
+				and user_tel like "%"#{user.user_tel} "%"
+			</if>
+			<if test="user.user_english !=null and user.user_english !=''">
+				or user_english like "%"#{user.user_english}"%"
 			</if>
 		</where>
 	</select>
-	
+	<!-- 删除员工信息 -->
+	<delete id="delByUsercode" parameterType="String">
+		delete from usr_user where user_code =#{user_code}
+	</delete>
 </mapper>

@@ -110,4 +110,9 @@
 		delete from
 		`sys_account` where acc_code =#{acc_code}
 	</delete>
+	
+	<!-- 根据user_code查询信息 -->
+	<select id="findByUser_code" parameterType="String" resultType="Account">
+		SELECT * FROM `sys_account` where user_code =#{user_code}
+	</select>
 </mapper>

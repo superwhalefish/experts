@@ -8,19 +8,22 @@ public class SysFenye {
 	private Integer limit;
 	private Account account;// 账号
 	private Role role;// 权限
-	private User user;//员工
 	
+	private User user;
 	public Integer getPage() {
 		return page;
 	}
+
 
 	public User getUser() {
 		return user;
 	}
 
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 
 	public void setPage(Integer page) {
 		this.page = page;
@@ -49,9 +52,12 @@ public class SysFenye {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+
+
 	@Override
 	public String toString() {
 		return "SysFenye [page=" + page + ", limit=" + limit + ", account=" + account + ", role=" + role + ", user="
 				+ user + "]";
 	}
+	
 }

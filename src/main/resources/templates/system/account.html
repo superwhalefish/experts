@@ -42,7 +42,7 @@
 							<option value="2">--未停用--</option>
 						</select>
 		</div>
-		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索</a>
+		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索<span class="layui-icon">&#xe615;</span></a>
 </form>
 </script>
 
@@ -66,7 +66,7 @@ function shezhi(acc_code){
 	function look(acc_code) {
 		layer.open({
 			offset : '100px',
-			area : [ '650px', '600px' ],
+			area : [ '650px', '500px' ],
 			type : 2,
 			content : [ '/SH/system/accountInfo?acc_code=' + acc_code, 'no' ]
 		});
@@ -78,6 +78,7 @@ function shezhi(acc_code){
 			time : 3000, //5s后自动关闭
 			offset : '30%',
 			btn : [ "删除", "取消" ],
+			shadeClose : true,
 			area : [ '200px', '100px' ],
 			yes : function() {
 				$.post("/SH/auth/delByAcc_code", {

@@ -1,10 +1,15 @@
 package com.shzp.utils;
+import org.springframework.stereotype.Component;
+
 import net.sourceforge.pinyin4j.PinyinHelper;
+
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+@Component
 public class PinYinUtil {
 	 /**
      * 将汉字转换为全拼
@@ -12,7 +17,7 @@ public class PinYinUtil {
      * @param src
      * @return String
      */
-    public static String getPinYin(String src) {
+    public String getPinYin(String src) {
         char[] t1 = null;
         t1 = src.toCharArray();
         String[] t2 = new String[t1.length];

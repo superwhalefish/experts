@@ -57,22 +57,17 @@
 					<li class="layui-nav-item">
 						<!--  layui-nav-itemed 导航栏是否打开 --> <a class="" href="javascript:;">系统管理</a>
 						<dl class="layui-nav-child">
+						<dd shiro:hasPermission="111111116">
+								<a data-url="usr/user" data-id="11" data-title="员工信息管理"
+									href="javascript:;" data-type="tabAdd">员工信息管理</a>
+							</dd>
 							<dd shiro:hasPermission="111111111">
 								<a data-url="system/account" data-id="1" data-title="员工账号管理"
 									href="javascript:;" data-type="tabAdd">员工账号管理</a>
 							</dd>
 							<dd shiro:hasPermission="111111112">
-								<a data-url="system/role" data-id="2" data-title="角色权限管理"
+								<a data-url="system/role" data-id="10" data-title="角色权限管理"
 									href="javascript:;" data-type="tabAdd">角色权限管理</a>
-							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<!--  layui-nav-itemed 导航栏是否打开 --> <a class="" href="javascript:;">用户管理</a>
-						<dl class="layui-nav-child">
-							<dd shiro:hasPermission="111111116">
-								<a data-url="usr/user" data-id="1" data-title="员工信息管理"
-									href="javascript:;" data-type="tabAdd">员工信息管理</a>
 							</dd>
 						</dl>
 					</li>
@@ -80,7 +75,7 @@
 						<!--  layui-nav-itemed 导航栏是否打开 --> <a class="" href="javascript:;">订单管理</a>
 						<dl class="layui-nav-child">
 							<dd shiro:hasPermission="111111117">
-								<a data-url="ord/order" data-id="1" data-title="订单信息管理"
+								<a data-url="ord/order" data-id="12" data-title="订单信息管理"
 									href="javascript:;" data-type="tabAdd">订单信息管理</a>
 							</dd>
 						</dl>
@@ -90,8 +85,14 @@
 						<!-- layui-nav-itemed 打开状态 --> <a class="" href="javascript:;">商品管理</a>
 						<dl class="layui-nav-child">
 							<dd shiro:hasPermission="111111115">
-								<a data-url="proinfo/proinfo" data-id="4" data-title="商品信息"
+								<a data-url="proinfo/proinfo" data-id="2" data-title="商品信息"
 									href="javascript:;" data-type="tabAdd">商品管理</a>
+							</dd>
+						</dl>
+						<dl class="layui-nav-child">
+							<dd shiro:hasPermission="111111118">
+								<a data-url="proinfo/proinfo" data-id="13" data-title="优惠券管理"
+									href="javascript:;" data-type="tabAdd">优惠券管理</a>
 							</dd>
 						</dl>
 					</li>

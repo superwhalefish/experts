@@ -19,14 +19,20 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private SysFenye sysFenye;
-	
+
 	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getUser(Integer page, Integer limit,User user) {
-		sysFenye.setPage((page-1)*limit);
+	public Map<String, Object> getUser(Integer page, Integer limit, User user) {
+		sysFenye.setPage((page - 1) * limit);
 		sysFenye.setLimit(limit);
 		sysFenye.setUser(user);
 		return userService.getUser(sysFenye);
-
 	}
+
+	@RequestMapping(value = "/delByUsercode", method = RequestMethod.POST)
+	@ResponseBody
+	public Integer delByUsercode(String user_code) {
+		return userService.delByUsercode(user_code);
+	}
+	
 }

@@ -40,8 +40,16 @@ public interface UserDao {
 
 	/**
 	 * 动态查询员工信息总条数
+	 * 
 	 * @param sysFenye
 	 * @return
 	 */
 	public Integer getUserCount(SysFenye sysFenye);
+
+	/**
+	 * 
+	 * @param user_code
+	 * @return
+	 */
+	public Integer delByUsercode(String user_code);
 }

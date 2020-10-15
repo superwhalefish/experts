@@ -56,9 +56,18 @@ public interface AccountDao {
 
 	/**
 	 * 根据账号acc_code查取账号信息
+	 * 
 	 * @param acc_code
 	 * @return
 	 */
 	public Account findByAcc_code(String acc_code);
+
+	/**
+	 * 根据user_code
+	 * 
+	 * @param user_code
+	 * @return
+	 */
+	public Account findByUser_code(String user_code);
 
 }

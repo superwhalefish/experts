@@ -16,4 +16,12 @@ public interface UserService {
 	 * @return
 	 */
 	public Map<String, Object> getUser(SysFenye sysFenye);
+
+	/**
+	 * 根据user_code删除信息
+	 * 
+	 * @param user_code
+	 * @return
+	 */
+	public Integer delByUsercode(String user_code);
 }
