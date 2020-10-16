@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shzp.sys.dao.CouponDao">
+
+
+	<!-- 获取优惠券信息 -->
+	<select id="getCoupon" parameterType="SysFenye"
+		resultType="Coupon">
+		SELECT * FROM `cus_coupon`
+		<where>
+			<if test="coupon.cou_state !=null and coupon.cou_state !=''">
+				and cou_state =#{coupon.cou_state}
+			</if>
+			<if test="coupon.cou_usestate !=null and coupon.cou_usestate !=''">
+				and cou_usestate =#{coupon.cou_usestate}
+			</if>
+			<if
+				test="coupon.cou_starttime !=null and coupon.cou_starttime!=''">
+				and cou_starttime =#{coupon.cou_starttime}
+			</if>
+			<if test="coupon.cou_endtime !=null and coupon.cou_endtime !=''">
+				and cou_endtime =#{coupon.cou_endtime}
+			</if>
+			<if
+				test="coupon.cou_typestate !=null and coupon.cou_typestate !=''">
+				and cou_typestate=#{coupon.cou_typestate}
+			</if>
+			<if test="coupon.cou_daytime !=null and coupon.cou_daytime !=''">
+				and cou_daytime =#{coupon.cou_daytime}
+			</if>
+			<if test="coupon.cou_pcstate !=null and coupon.cou_pcstate !=''">
+				and cou_pcstate =#{coupon.cou_pcstate}
+			</if>
+			<if test="coupon.pccode !=null and coupon.pccode !=''">
+				and pccode =#{coupon.pccode}
+			</if>
+		</where>
+		limit #{page},#{limit}
+	</select>
+	<!-- 统计总条数 -->
+	<select id="getCouponCount" parameterType="SysFenye"
+		resultType="_int">
+		SELECT count(*) FROM `cus_coupon`
+		<where>
+			<if test="coupon.cou_state !=null and coupon.cou_state !=''">
+				and cou_state =#{coupon.cou_state}
+			</if>
+			<if test="coupon.cou_usestate !=null and coupon.cou_usestate !=''">
+				and cou_usestate =#{coupon.cou_usestate}
+			</if>
+			<if
+				test="coupon.cou_starttime !=null and coupon.cou_starttime!=''">
+				and cou_starttime =#{coupon.cou_starttime}
+			</if>
+			<if test="coupon.cou_endtime !=null and coupon.cou_endtime !=''">
+				and cou_endtime =#{coupon.cou_endtime}
+			</if>
+			<if
+				test="coupon.cou_typestate !=null and coupon.cou_typestate !=''">
+				and cou_typestate=#{coupon.cou_typestate}
+			</if>
+			<if test="coupon.cou_daytime !=null and coupon.cou_daytime !=''">
+				and cou_daytime =#{coupon.cou_daytime}
+			</if>
+			<if test="coupon.cou_pcstate !=null and coupon.cou_pcstate !=''">
+				and cou_pcstate =#{coupon.cou_pcstate}
+			</if>
+			<if test="coupon.pccode !=null and coupon.pccode !=''">
+				and pccode =#{coupon.pccode}
+			</if>
+		</where>
+	</select>
+	<!-- 更新优惠券信息 -->
+	<update id="updateCoupon" parameterType="Coupon">
+		update cus_coupon
+		<set>
+			<if test=" cou_name !=null and cou_name !=''">
+				cou_name=#{cou_name},
+			</if>
+			<if test=" cou_discount !=null and cou_discount !=''">
+				cou_discount=#{cou_discount},
+			</if>
+			<if test="cou_mitigate !=null and cou_mitigate !=''">
+				cou_mitigate=#{cou_mitigate},
+			</if>
+			<if test="cou_state !=null and cou_state !=''">
+				cou_state=#{cou_state},
+			</if>
+			<if test=" cou_usestate !=null and cou_usestate !=''">
+				cou_usestate=#{cou_usestate},
+			</if>
+			<if test="cou_starttime !=null and cou_starttime !=''">
+				cou_starttime=#{cou_starttime},
+			</if>
+			<if test="cou_endtime !=null and cou_endtime !=''">
+				cou_endtime=#{cou_endtime},
+			</if>
+			<if test="cou_typestate !=null and cou_typestate !=''">
+				cou_typestate=#{cou_typestate},
+			</if>
+			<if test="cou_daytime !=null and cou_daytime !=''">
+				cou_daytime=#{cou_daytime},
+			</if>
+			<if test="cou_num !=null and cou_num !=''">
+				cou_num=#{cou_num},
+			</if>
+			<if test="cou_pcstate !=null and cou_pcstate !=''">
+				cou_pcstate=#{cou_pcstate},
+			</if>
+			<if test="pccode !=null and pccode !=''">
+				pccode=#{pccode},
+			</if>
+		</set>
+		<where>
+			<if test="coupon_code !=null and coupon_code !=''">
+				and coupon_code =#{coupon_code}
+			</if>
+		</where>
+	</update>
+</mapper>

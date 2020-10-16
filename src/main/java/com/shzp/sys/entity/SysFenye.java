@@ -8,22 +8,28 @@ public class SysFenye {
 	private Integer limit;
 	private Account account;// 账号
 	private Role role;// 权限
-	
-	private User user;
+	private User user;// 员工
+	private Coupon coupon;// 优惠券
+
 	public Integer getPage() {
 		return page;
 	}
-
 
 	public User getUser() {
 		return user;
 	}
 
+	public Coupon getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
+	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 	public void setPage(Integer page) {
 		this.page = page;
@@ -53,11 +59,10 @@ public class SysFenye {
 		this.account = account;
 	}
 
-
 	@Override
 	public String toString() {
 		return "SysFenye [page=" + page + ", limit=" + limit + ", account=" + account + ", role=" + role + ", user="
-				+ user + "]";
+				+ user + ", coupon=" + coupon + "]";
 	}
-	
+
 }

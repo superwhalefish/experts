@@ -45,11 +45,6 @@
 		<a class='layui-btn layui-btn-radius layui-btn-normal' onclick='init()'>搜索<span class="layui-icon">&#xe615;</span></a>
 </form>
 </script>
-
-
-
-
-
 </body>
 <script type="text/javascript">
 
@@ -186,8 +181,10 @@ function shezhi(acc_code){
 										acc_state : 1
 									}, function(res) {
 										if (res > 0) {
+											table.reload("usertab");
 											layer.msg('设置成功');
 										} else {
+											table.reload("usertab");
 											layer.msg('服务器繁忙，请稍后重试.....');
 										}
 									})
@@ -197,8 +194,10 @@ function shezhi(acc_code){
 										acc_state : 2
 									}, function(res) {
 										if (res > 0) {
+											table.reload("usertab");
 											layer.msg('设置成功');
 										} else {
+											table.reload("usertab");
 											layer.msg('服务器繁忙，请稍后重试.....');
 										}
 									})

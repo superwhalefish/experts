@@ -1,4 +1,4 @@
-package com.shzp.usr.thymeleaf;
+package com.shzp.sys.thymeleaf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,7 @@ import com.shzp.sys.dao.AccountDao;
 
 @Controller
 @RequestMapping(value = "/usr")
-public class ThymeleafController {
+public class UsrThymeleaf {
 	@Autowired
 	private AccountDao accountDao;
 

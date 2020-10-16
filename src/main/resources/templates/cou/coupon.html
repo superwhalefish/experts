@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>优惠券管理</title>
+<link rel="stylesheet" href="../js/layui/css/layui.css">
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript"
+	src="../js/jquery-easyui-1.9.7/jquery.min.js"></script>
+<script type="text/javascript" src="../js/vue/vue.js"></script>
+</head>
+<style>
+.layui-table-cell {
+	height: inherit;
+}
+</style>
+<body>
+	<table id="coupontab" lay-filter="test"></table>
+</body>
+<script type="text/html" id="coupontoolbar">
+<form class="layui-form ">
+
+			<div class="layui-form-item ">
+				<label class="layui-form-label">类型</label>
+				<div class="layui-input-inline">
+					<select id="cou_state" lay-filter="aihao">
+						<option value="">--折扣类型--</option>
+						<option value="1">折扣</option>
+						<option value="2">固减</option>
+					</select>
+				</div>
+
+				<label class="layui-form-label">上架</label>
+				<div class="layui-input-inline">
+					<select id="cou_usestate" lay-filter="aihao">
+						<option value="">--上架状态--</option>
+						<option value="1">已上架</option>
+						<option value="2">未上架</option>
+					</select>
+				</div>
+
+				<label class="layui-form-label">期限</label>
+				<div class="layui-input-inline">
+					<select id="cou_usestate" lay-filter="aihao">
+						<option value="">--优惠券期限类型--</option>
+						<option value="1">永久</option>
+						<option value="2">期限</option>
+					</select>
+				</div>
+
+				<label class="layui-form-label">天数</label>
+				<div class="layui-input-inline">
+					 <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入优惠券优惠天数（例：1）" class="layui-input">
+				</div>
+			
+				<label class="layui-form-label">专属</label>
+				<div class="layui-input-inline">
+					<select id="cou_pcstate" lay-filter="aihao">
+						<option value="">--是否为专属优惠--</option>
+						<option value="1">是</option>
+						<option value="2">否</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">商品券</label>
+				<div class="layui-input-inline">
+					<select id="pccode" lay-filter="aihao">
+						<option value="">--请选择商品--</option>
+					</select>
+				</div>
+	<a class='layui-btn layui-btn-radius layui-btn-normal' href="javascript:init()" >搜索<span class="layui-icon">&#xe615;</span></a>
+	<a class='layui-btn layui-btn-radius layui-btn-normal' href="javascript:add()" >添加<span class="layui-icon">&#xe654;</span></a>
+			</div>
+		</form>
+</script>
+
+<script type="text/html" id="offcou_usestate">
+<input type="checkbox" name="open" value="{{d.cou_usestate}}" lay-skin="switch" lay-text="已上架|未上架 " lay-filter="switchcou_usestatestatus" {{ d.cou_usestate=='1' ? 'checked' : '' }} data-id="{{d.id}}">
+</script>
+<script type="text/javascript">
+	$(function() {
+		init();
+	})
+/* var its = '<option value="' + item.cid + '">' + item.cname
+							+ '</option>';
+					$("#getcate").append(its); */
+	function init() {
+		layui
+				.use(
+						[ 'table', 'form', 'laydate' ],
+						function() {
+							var table = layui.table;
+							var form = layui.form;
+							var laydate = layui.laydate;
+							table
+									.render({
+										elem : '#coupontab' //指定原始表格元素选择器（推荐id选择器）
+										,
+										toolbar : "#coupontoolbar",
+										where : {
+											cou_state : $("#cou_state").val(),
+											cou_usestate : $("#cou_usestate").val(),
+											cou_starttime : $("#cou_starttime").val(),
+											cou_endtime : $("#cou_endtime").val(),
+											cou_typestate :$("#cou_typestate").val(),
+											cou_daytime : $("#cou_daytime").val(),
+											cou_pcstate :$("#cou_pcstate").val(),
+											pccode : $("#pccode").val(),
+										},
+										id : "coupontab",
+										method : "post",
+										loading : true,
+										page : true,
+										url : "/SH/cou/getCoupon",
+										height : 'full-100',
+										cols : [ [
+											{
+												field : "coupon_code",
+												title : "优惠券编码",
+											},
+												
+												{
+													field : 'cou_name',
+													title : '优惠券名称',
+												},
+												{
+													field : 'cou_discount',
+													title : '折扣(几折)',
+													templet:function(d){
+														if(d.cou_state=="2"){
+															return "<p style='color:blue'>"+d.cou_discount+"</p>";
+														}else{
+															return "<p style='color:blue'>提示：</p><p style='color:yellow'>此券已设置为固减券</p>";
+														}
+													}
+												},
+												{
+													field : 'cou_mitigate',
+													title : "减免/￥",
+													templet:function(d){
+														if(d.cou_state=="1"){
+															return "<p style='color:blue'>"+d.cou_mitigate+"</p>";
+														}else{
+															return "<p style='color:red'>提示：</p><p style='color:blue'>此券已设置为折扣券</p>";
+														}
+													}
+												},
+												{
+													field : 'cou_state',
+													title : '券状态',
+													templet:function(d){
+														if(d.cou_state=="2"){
+															return "<p style='color:red'>折扣券</p>";
+														}else{
+															return "<p style='color:blue'>固减券</p>";
+														}
+													}
+												},
+												{
+													field : 'cou_usestate',
+													title : '上架状态',
+													templet:"#offcou_usestate"
+												},
+												{
+													field : 'cou_starttime',
+													title : '折扣开始时间',
+												},
+												{
+													field : 'cou_endtime',
+													title : '折扣结束时间',
+												},
+												{
+													field : 'cou_typestate',
+													title : '券有效期',
+													templet:function(d){
+														if(d.cou_typestate=="1"){
+															return "<p style='color:green'>无期限</p>";
+														}else{
+															return "<p style='color:blue'>期限券子</p> ";
+														}
+													}
+												},
+												{
+													field : 'cou_daytime',
+													title : '有效时间',
+												},
+												{
+													field : 'cou_num',
+													title : '优惠券数量',
+												},
+												{
+													field : 'cou_pcstate',
+													title : '商品专属',
+												},
+												{
+													field : 'pccode',
+													title : '商品编号',
+												},
+												{
+													fixed : "right",
+													title : "操作",
+													width : "230",
+													templet : function(d) {
+														return "<div><a class='layui-btn layui-btn-radius layui-btn-xs'onclick='look("
+																+ d.acc_code
+																+ ")' >查看<span class='layui-icon'>&#xe615;</span></a><a class='layui-btn layui-btn-radius layui-btn-warm layui-btn-xs'onclick='shezhi("
+																+ d.acc_code
+																+ ")' >设置<span class='layui-icon'>&#xe614;</span></a><a class='layui-btn layui-btn-radius  layui-btn-danger layui-btn-xs'onclick='del("
+																+ d.acc_code
+																+ ")' >删除 <span class='layui-icon'>&#xe640;</span></a></div>"
+													}
+												} ] ],
+										limit : 10,
+										limits : [ 10, 20, 50 ]
+									});
+							 				form.on("switch(switchcou_usestatestatus)", function(data) {
+												var selectIfKey = data.othis;
+												var parentTr = selectIfKey.parents("tr");
+												var coupon_code = $(parentTr).find("td:eq(0)")
+														.find(".layui-table-cell").text();
+												if (data.elem.checked == true) {
+													$.post("/SH/cou/updateCoupon", {
+														coupon_code : coupon_code,
+														cou_usestate : 1
+													}, function(res) {
+														if (res > 0) {
+															table.reload("coupontab");
+															layer.msg('设置成功');
+														} else {
+															table.reload("coupontab");
+															layer.msg('服务器繁忙，请稍后重试.....');
+														}
+													})
+												} else {
+													$.post("/SH/cou/updateCoupon", {
+														coupon_code : coupon_code,
+														cou_usestate : 2
+													}, function(res) {
+														if (res > 0) {
+															table.reload("coupontab");
+															layer.msg('设置成功');
+														} else {
+															table.reload("coupontab");
+															layer.msg('服务器繁忙，请稍后重试.....');
+														}
+													})
+												}
+											}); 
+						})
+	}
+</script>
+</html>
